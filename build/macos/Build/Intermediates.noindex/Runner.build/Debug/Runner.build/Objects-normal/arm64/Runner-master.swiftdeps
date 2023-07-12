@@ -1,0 +1,8 @@
+version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
+options: "c5a8fd77ba227ae651b0494d1942b42dce973981f059242f9e3df2ce8d156cb7"
+build_start_time: [1688985663, 565201000]
+build_end_time: [1688985669, 907082000]
+inputs:
+  "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Flutter/GeneratedPluginRegistrant.swift": [1688985600, 356676372]
+  "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Runner/AppDelegate.swift": [1686756961, 0]
+  "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Runner/MainFlutterWindow.swift": [1686756961, 0]

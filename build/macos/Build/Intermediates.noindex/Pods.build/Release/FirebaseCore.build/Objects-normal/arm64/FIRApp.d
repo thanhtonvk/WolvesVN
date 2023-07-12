@@ -1,0 +1,44 @@
+dependencies: \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/macos/Build/Intermediates.noindex/Pods.build/Release/FirebaseCore.build/module.modulemap \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/FIRApp.m \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRApp.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/FIRAnalyticsConfiguration.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/FIRBundleUtil.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/FIRComponentContainerInternal.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Extension/FIRComponentContainer.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Extension/FIRLibrary.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/FIRConfigurationInternal.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRConfiguration.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRLoggerLevel.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/FIRFirebaseUserAgent.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Extension/FIRAppInternal.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Extension/FIRHeartbeatLogger.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Extension/FIRLogger.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Extension/FIROptionsInternal.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIROptions.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRVersion.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/macos/Build/Intermediates.noindex/Pods.build/Release/GoogleUtilities.build/module.modulemap \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/Target\ Support\ Files/GoogleUtilities/GoogleUtilities-umbrella.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/AppDelegateSwizzler/Public/GoogleUtilities/GULAppDelegateSwizzler.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/AppDelegateSwizzler/Public/GoogleUtilities/GULApplication.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/AppDelegateSwizzler/Public/GoogleUtilities/GULSceneDelegateSwizzler.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Environment/Public/GoogleUtilities/GULAppEnvironmentUtil.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Environment/Public/GoogleUtilities/GULHeartbeatDateStorable.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Environment/Public/GoogleUtilities/GULHeartbeatDateStorage.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Environment/Public/GoogleUtilities/GULHeartbeatDateStorageUserDefaults.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Environment/Public/GoogleUtilities/GULKeychainStorage.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Environment/Public/GoogleUtilities/GULKeychainUtils.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Environment/Public/GoogleUtilities/GULNetworkInfo.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Environment/Public/GoogleUtilities/GULSecureCoding.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Environment/Public/GoogleUtilities/GULURLSessionDataResponse.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Environment/Public/GoogleUtilities/NSURLSession+GULPromises.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Logger/Public/GoogleUtilities/GULLogger.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Logger/Public/GoogleUtilities/GULLoggerLevel.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/NSData+zlib/Public/GoogleUtilities/GULNSData+zlib.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Network/Public/GoogleUtilities/GULMutableDictionary.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Network/Public/GoogleUtilities/GULNetwork.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Network/Public/GoogleUtilities/GULNetworkConstants.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Network/Public/GoogleUtilities/GULNetworkLoggerProtocol.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Network/Public/GoogleUtilities/GULNetworkMessageCode.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Network/Public/GoogleUtilities/GULNetworkURLSession.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/GoogleUtilities/GoogleUtilities/Reachability/Public/GoogleUtilities/GULReachabilityChecker.h

@@ -1,0 +1,29 @@
+version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
+options: "fc3800bf61d56488c87c9f7b2d4eb3df3a9e6fa6bfd53d37e1fa75659666322a"
+build_start_time: [1689145160, 869386000]
+build_end_time: [1689145160, 978021000]
+inputs:
+  ? "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Heartbeat.swift"
+  : !dirty [1689145107, 167780712]
+  ? "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatController.swift"
+  : !dirty [1689145107, 169803798]
+  ? "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatLoggingTestUtils.swift"
+  : !dirty [1689145107, 178654866]
+  ? "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatStorage.swift"
+  : !dirty [1689145107, 179440127]
+  ? "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsBundle.swift"
+  : !dirty [1689145107, 179930149]
+  ? "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsPayload.swift"
+  : !dirty [1689145107, 181205932]
+  ? "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/RingBuffer.swift"
+  : !dirty [1689145107, 168412437]
+  ? "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Storage.swift"
+  : !dirty [1689145107, 166469513]
+  ? "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/StorageFactory.swift"
+  : !dirty [1689145107, 181462756]
+  ? "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/WeakContainer.swift"
+  : !dirty [1689145107, 180193097]
+  ? "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatController.swift"
+  : !dirty [1689145107, 169042204]
+  ? "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatsPayload.swift"
+  : !dirty [1689145107, 177628490]

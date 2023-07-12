@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
+options: "bd9ddc200f18154ae5721f407e48f95fcd27f44ed261ba30a290c31132816cff"
+build_start_time: [1689145160, 869425000]
+build_end_time: [1689145226, 653004000]
+inputs:
+  "/Users/tonsociu/.pub-cache/hosted/pub.dev/url_launcher_macos-3.0.5/macos/Classes/UrlLauncherPlugin.swift": [1688788183, 881401185]
+  "/Users/tonsociu/.pub-cache/hosted/pub.dev/url_launcher_macos-3.0.5/macos/Classes/messages.g.swift": [1688788183, 881564097]

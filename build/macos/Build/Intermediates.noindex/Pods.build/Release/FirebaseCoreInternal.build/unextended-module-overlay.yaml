@@ -1,0 +1,23 @@
+{
+  'version': 0,
+  'use-external-names': 'false',
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/macos/Build/Products/Release/FirebaseCoreInternal/FirebaseCoreInternal.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/macos/Build/Intermediates.noindex/Pods.build/Release/FirebaseCoreInternal.build/unextended-module.modulemap",
+    }]
+    },
+    {
+    'type': 'directory',
+    'name': "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/macos/Build/Products/Release/FirebaseCoreInternal/FirebaseCoreInternal.framework/Headers"
+    'contents': [{
+      'type': 'file',
+      'name': "FirebaseCoreInternal-Swift.h",
+      'external-contents': "/Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/macos/Build/Intermediates.noindex/Pods.build/Release/FirebaseCoreInternal.build/unextended-interface-header.h",
+    }]
+    }]
+}

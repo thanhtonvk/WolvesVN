@@ -1,0 +1,31 @@
+dependencies: \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/macos/Build/Intermediates.noindex/Pods.build/Release/FirebaseAuth.build/module.modulemap \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseAuth/Sources/Storage/FIRAuthKeychainServices.m \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseAuth/Sources/Storage/FIRAuthKeychainServices.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseCore/Extension/FirebaseCoreInternal.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/macos/Build/Intermediates.noindex/Pods.build/Release/FirebaseCore.build/module.modulemap \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/Target\ Support\ Files/FirebaseCore/FirebaseCore-umbrella.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRApp.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRConfiguration.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRLoggerLevel.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FirebaseCore.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIROptions.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRVersion.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseCore/Extension/FIRAppInternal.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseCore/Extension/FIRComponent.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseCore/Extension/FIRComponentContainer.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseCore/Extension/FIRComponentType.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseCore/Extension/FIRDependency.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseCore/Extension/FIRHeartbeatLogger.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseCore/Extension/FIRLibrary.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseCore/Extension/FIRLogger.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseCore/Extension/FIROptionsInternal.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseAuth/Sources/Auth/FIRAuth_Internal.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseAuth/Interop/FIRAuthInterop.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuth.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuthAPNSTokenType.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuthErrors.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseAuth/Sources/Storage/FIRAuthUserDefaults.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseAuth/Sources/Utilities/FIRAuthErrorUtils.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRMultiFactorInfo.h \
+  /Users/tonsociu/Desktop/WolvesVN/WolvesVN/macos/Pods/FirebaseAuth/FirebaseAuth/Sources/Utilities/FIRAuthInternalErrors.h
