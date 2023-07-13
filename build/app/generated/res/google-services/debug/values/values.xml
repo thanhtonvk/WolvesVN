@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">370312580610-o4r3a75kcrhdca1g2iap7mecgcj4n4ic.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://wolfteam-f01f4-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+    <string name="gcm_defaultSenderId" translatable="false">370312580610</string>
+    <string name="google_api_key" translatable="false">AIzaSyDZabMViZon9AD0TAHJ6Ev8ES-bXlEhCBs</string>
+    <string name="google_app_id" translatable="false">1:370312580610:android:85f2148d8166924670a11b</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDZabMViZon9AD0TAHJ6Ev8ES-bXlEhCBs</string>
+    <string name="google_storage_bucket" translatable="false">wolfteam-f01f4.appspot.com</string>
+    <string name="project_id" translatable="false">wolfteam-f01f4</string>
+</resources>

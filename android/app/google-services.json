@@ -8,43 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:370312580610:android:ae5cc345e8b0b4a470a11b",
-        "android_client_info": {
-          "package_name": "com.companyname.wolvesvnteam"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "370312580610-o4r3a75kcrhdca1g2iap7mecgcj4n4ic.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDZabMViZon9AD0TAHJ6Ev8ES-bXlEhCBs"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "370312580610-o4r3a75kcrhdca1g2iap7mecgcj4n4ic.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "370312580610-5caj2rgjmqgaha6cj407hdssvv3j4qle.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.companyname.WolvesVNTeam",
-                "app_store_id": "1665706517"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:370312580610:android:85f2148d8166924670a11b",
         "android_client_info": {
           "package_name": "com.wolvesvn.wolvesvn"

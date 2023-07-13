@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:wolvesvn/services/notification_service.dart';
 import 'package:wolvesvn/ui/main_fragment/general.dart';
 import 'package:wolvesvn/ui/main_fragment/market.dart';
 import 'package:wolvesvn/ui/main_fragment/news.dart';
@@ -80,7 +82,9 @@ class MainPageHomeState extends State<MainPage> {
       Common.isVip = false;
     });
   }
+
   FirebaseDatabase database = FirebaseDatabase.instance;
+
   @override
   void initState() {
     // checkVip();
@@ -98,11 +102,8 @@ class MainPageHomeState extends State<MainPage> {
         Common.pip = value['TongPip'].toString();
         Common.trades = value['Trades'].toString();
         Common.winRate = value['WinRate'].toString();
-
       }
-      setState(() {
-
-      });
+      setState(() {});
     });
     return getFragment();
   }

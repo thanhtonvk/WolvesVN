@@ -1,13 +1,18 @@
 import 'dart:async';
 
+import 'package:app_settings/app_settings.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wolvesvn/firebase_options.dart';
 import 'package:wolvesvn/services/api_service.dart';
+import 'package:wolvesvn/services/firebase_api.dart';
+import 'package:wolvesvn/services/notification_service.dart';
 import 'package:wolvesvn/ui/login.dart';
 import 'package:wolvesvn/ui/main_page.dart';
 
@@ -16,11 +21,20 @@ import 'generated/config.dart';
 import 'models/account.dart';
 import 'models/vip.dart';
 
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+  print("Handling a background message: ${message.messageId}");
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
 }
 
@@ -62,13 +76,20 @@ class _MyHomePageState extends State<MyHomePage> {
     password = prefs.getString('password')!;
   }
 
+  NotificationService notificationService = NotificationService();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getData();
-
-    startTimer();
+    notificationService.requestPermission();
+    notificationService.firebaseInit();
+    // notificationService.isTokenRefresh();
+    notificationService.getDeviceToken().then((value) {
+      print('token: ${value}');
+    });
+    // getData();
+    // startTimer();
   }
 
   @override

@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+// Import for Android features.
+import 'package:webview_flutter_android/webview_flutter_android.dart';
 import '../../generated/common.dart';
 
 class MarketUI extends StatefulWidget {
@@ -25,48 +29,54 @@ class MarketState extends State<MarketUI> {
         backgroundColor: Colors.black54,
         body: SafeArea(
             child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      logo,
-                      width: 80,
-                      height: 80,
-                      fit: BoxFit.contain,
-                      scale: 0.1,
-                    ),
-                    Container(
-                      width: 200,
-                      margin: const EdgeInsets.only(left: 10),
-                      child: Column(
-                        children: [
-                          showInformation("Tên",
-                              ": ${Common.ACCOUNT.FirstName} ${Common.ACCOUNT.LastName}"),
-                          showInformation("ID", ": ${Common.ACCOUNT.Id}")
-                        ],
-                      ),
-                    )
-                  ],
+                Image.asset(
+                  logo,
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.contain,
+                  scale: 0.1,
                 ),
-                const Divider(
-                  color: Colors.white,
-                  height: 10,
-                  thickness: 1,
-                  indent: 5,
-                  endIndent: 5,
-                ),
-                SizedBox(
-                  height: 20,
-                  child: Container(
-                    margin: const EdgeInsets.only(right: 10),
-                    alignment: Alignment.topRight,
-                    child: dropoutWidget(),
+                Container(
+                  width: 200,
+                  margin: const EdgeInsets.only(left: 10),
+                  child: Column(
+                    children: [
+                      showInformation("Tên",
+                          ": ${Common.ACCOUNT.FirstName} ${Common.ACCOUNT.LastName}"),
+                      showInformation("ID", ": ${Common.ACCOUNT.Id}")
+                    ],
                   ),
-                ),
-                listView()
+                )
               ],
-            )));
+            ),
+            const Divider(
+              color: Colors.white,
+              height: 10,
+              thickness: 1,
+              indent: 5,
+              endIndent: 5,
+            ),
+            SizedBox(
+              height: 20,
+              child: Container(
+                margin: const EdgeInsets.only(right: 10),
+                alignment: Alignment.topRight,
+                child: dropoutWidget(),
+              ),
+            ),
+            listView()
+          ],
+        )));
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   WebViewController controller = WebViewController();
@@ -102,8 +112,14 @@ class MarketState extends State<MarketUI> {
   }
 
   Widget listView() {
+    controller.setJavaScriptMode(JavaScriptMode.unrestricted);
     controller.setBackgroundColor(Colors.black);
     controller.enableZoom(false);
+    if (controller.platform is AndroidWebViewController) {
+      AndroidWebViewController.enableDebugging(true);
+      (controller.platform as AndroidWebViewController)
+          .setMediaPlaybackRequiresUserGesture(false);
+    }
     DatabaseReference ref = database.ref('Chart').child(chart);
     return StreamBuilder(
       stream: ref.onValue,
@@ -111,6 +127,7 @@ class MarketState extends State<MarketUI> {
         if (snapshot.hasData) {
           String? html = snapshot.data?.snapshot.value.toString();
           controller.loadHtmlString(html as String);
+          // controller.loadHtmlString();
           return Expanded(
               child: WebViewWidget(
             controller: controller,

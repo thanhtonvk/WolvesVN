@@ -1,0 +1,427 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.wolvesvn.wolvesvn"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="33" />
+10    <!--
+11         The INTERNET permission is required for development. Specifically,
+12         the Flutter tool needs it to communicate with the running application
+13         to allow setting breakpoints, to provide hot reload, etc.
+14    -->
+15    <uses-permission android:name="android.permission.INTERNET" />
+15-->/Users/tonsociu/Desktop/WolvesVN/WolvesVN/android/app/src/main/AndroidManifest.xml:3:5-67
+15-->/Users/tonsociu/Desktop/WolvesVN/WolvesVN/android/app/src/main/AndroidManifest.xml:3:22-64
+16    <uses-permission android:name="android.permission.WAKE_LOCK" />
+16-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:10:5-68
+16-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:10:22-65
+17    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Permissions options for the `notification` group -->
+17-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:11:5-79
+17-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:11:22-76
+18    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+18-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:13:5-77
+18-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:13:22-74
+19    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+19-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-81
+19-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-78
+20    <uses-permission android:name="android.permission.VIBRATE" />
+20-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:10:5-66
+20-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:10:22-63
+21    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+21-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:11:5-81
+21-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:11:22-78
+22    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+22-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:12:5-79
+22-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:12:22-76
+23    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+23-->[com.google.firebase:firebase-iid:21.1.0] /Users/tonsociu/.gradle/caches/transforms-3/77bdb4432be343bb995d94dd298a1eae/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:26:5-82
+23-->[com.google.firebase:firebase-iid:21.1.0] /Users/tonsociu/.gradle/caches/transforms-3/77bdb4432be343bb995d94dd298a1eae/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:26:22-79
+24
+25    <application
+26        android:name="android.app.Application"
+27        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+27-->[androidx.core:core:1.7.0] /Users/tonsociu/.gradle/caches/transforms-3/0daeb4ab5ba3b0ca5699f9990826fc7d/transformed/core-1.7.0/AndroidManifest.xml:24:18-86
+28        android:debuggable="true"
+29        android:icon="@mipmap/ic_launcher"
+30        android:label="wolvesvn" >
+31        <activity
+32            android:name="com.wolvesvn.wolvesvn.MainActivity"
+33            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+34            android:exported="true"
+35            android:hardwareAccelerated="true"
+36            android:launchMode="singleTop"
+37            android:theme="@style/LaunchTheme"
+38            android:windowSoftInputMode="adjustResize" >
+39
+40            <!--
+41                 Specifies an Android theme to apply to this Activity as soon as
+42                 the Android process has started. This theme is visible to the user
+43                 while the Flutter UI initializes. After that, this theme continues
+44                 to determine the Window background behind the Flutter UI.
+45            -->
+46            <meta-data
+47                android:name="io.flutter.embedding.android.NormalTheme"
+48                android:resource="@style/NormalTheme" />
+49
+50            <intent-filter>
+51                <action android:name="android.intent.action.MAIN" />
+52
+53                <category android:name="android.intent.category.LAUNCHER" />
+54            </intent-filter>
+55        </activity>
+56        <!--
+57             Don't delete the meta-data below.
+58             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+59        -->
+60        <meta-data
+61            android:name="flutterEmbedding"
+62            android:value="2" />
+63        <meta-data
+64            android:name="com.google.firebase.messaging.default_notification_channel_id"
+65            android:value="high_importance_channel" />
+66
+67        <service
+67-->[:firebase_auth] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
+68            android:name="com.google.firebase.components.ComponentDiscoveryService"
+68-->[:firebase_auth] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-89
+69            android:directBootAware="true"
+69-->[com.google.firebase:firebase-common:20.3.2] /Users/tonsociu/.gradle/caches/transforms-3/0d80e9c6f7604b4a9011703a89be7119/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:34:13-43
+70            android:exported="false" >
+70-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:68:13-37
+71            <meta-data
+71-->[:firebase_auth] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+72                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
+72-->[:firebase_auth] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
+73                android:value="com.google.firebase.components.ComponentRegistrar" />
+73-->[:firebase_auth] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+74            <meta-data
+74-->[:firebase_database] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_database/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+75                android:name="com.google.firebase.components:io.flutter.plugins.firebase.database.FlutterFirebaseAppRegistrar"
+75-->[:firebase_database] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_database/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-127
+76                android:value="com.google.firebase.components.ComponentRegistrar" />
+76-->[:firebase_database] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_database/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+77            <meta-data
+77-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:38:13-40:85
+78                android:name="com.google.firebase.components:io.flutter.plugins.firebase.messaging.FlutterFirebaseAppRegistrar"
+78-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:39:17-128
+79                android:value="com.google.firebase.components.ComponentRegistrar" />
+79-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:40:17-82
+80            <meta-data
+80-->[:firebase_core] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+81                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
+81-->[:firebase_core] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
+82                android:value="com.google.firebase.components.ComponentRegistrar" />
+82-->[:firebase_core] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+83            <meta-data
+83-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:69:13-71:85
+84                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+84-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:70:17-109
+85                android:value="com.google.firebase.components.ComponentRegistrar" />
+85-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:71:17-82
+86            <meta-data
+86-->[com.google.firebase:firebase-iid:21.1.0] /Users/tonsociu/.gradle/caches/transforms-3/77bdb4432be343bb995d94dd298a1eae/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:32:13-34:85
+87                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+87-->[com.google.firebase:firebase-iid:21.1.0] /Users/tonsociu/.gradle/caches/transforms-3/77bdb4432be343bb995d94dd298a1eae/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:33:17-96
+88                android:value="com.google.firebase.components.ComponentRegistrar" />
+88-->[com.google.firebase:firebase-iid:21.1.0] /Users/tonsociu/.gradle/caches/transforms-3/77bdb4432be343bb995d94dd298a1eae/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:34:17-82
+89            <meta-data
+89-->[com.google.firebase:firebase-messaging:23.1.2] /Users/tonsociu/.gradle/caches/transforms-3/6695f8f0ad91f18cd953f5c4d92afa41/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:55:13-57:85
+90                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+90-->[com.google.firebase:firebase-messaging:23.1.2] /Users/tonsociu/.gradle/caches/transforms-3/6695f8f0ad91f18cd953f5c4d92afa41/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:56:17-119
+91                android:value="com.google.firebase.components.ComponentRegistrar" />
+91-->[com.google.firebase:firebase-messaging:23.1.2] /Users/tonsociu/.gradle/caches/transforms-3/6695f8f0ad91f18cd953f5c4d92afa41/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:57:17-82
+92            <meta-data
+92-->[com.google.firebase:firebase-database:20.2.1] /Users/tonsociu/.gradle/caches/transforms-3/a50202f3f3aad481335378999da740dc/transformed/jetified-firebase-database-20.2.1/AndroidManifest.xml:31:13-33:85
+93                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
+93-->[com.google.firebase:firebase-database:20.2.1] /Users/tonsociu/.gradle/caches/transforms-3/a50202f3f3aad481335378999da740dc/transformed/jetified-firebase-database-20.2.1/AndroidManifest.xml:32:17-109
+94                android:value="com.google.firebase.components.ComponentRegistrar" />
+94-->[com.google.firebase:firebase-database:20.2.1] /Users/tonsociu/.gradle/caches/transforms-3/a50202f3f3aad481335378999da740dc/transformed/jetified-firebase-database-20.2.1/AndroidManifest.xml:33:17-82
+95            <meta-data
+95-->[com.google.firebase:firebase-installations:17.1.3] /Users/tonsociu/.gradle/caches/transforms-3/b23bba20aa980794a8ba05151e811cfa/transformed/jetified-firebase-installations-17.1.3/AndroidManifest.xml:17:13-19:85
+96                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+96-->[com.google.firebase:firebase-installations:17.1.3] /Users/tonsociu/.gradle/caches/transforms-3/b23bba20aa980794a8ba05151e811cfa/transformed/jetified-firebase-installations-17.1.3/AndroidManifest.xml:18:17-127
+97                android:value="com.google.firebase.components.ComponentRegistrar" />
+97-->[com.google.firebase:firebase-installations:17.1.3] /Users/tonsociu/.gradle/caches/transforms-3/b23bba20aa980794a8ba05151e811cfa/transformed/jetified-firebase-installations-17.1.3/AndroidManifest.xml:19:17-82
+98            <meta-data
+98-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/tonsociu/.gradle/caches/transforms-3/a53fb57b4e21ad1ffce5bcd26bce319b/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:27:13-29:85
+99                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+99-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/tonsociu/.gradle/caches/transforms-3/a53fb57b4e21ad1ffce5bcd26bce319b/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:28:17-115
+100                android:value="com.google.firebase.components.ComponentRegistrar" />
+100-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/tonsociu/.gradle/caches/transforms-3/a53fb57b4e21ad1ffce5bcd26bce319b/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:29:17-82
+101        </service>
+102        <service
+102-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:16:9-19:72
+103            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService"
+103-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-107
+104            android:exported="false"
+104-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-37
+105            android:permission="android.permission.BIND_JOB_SERVICE" />
+105-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-69
+106        <service
+106-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:20:9-26:19
+107            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingService"
+107-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:21:13-97
+108            android:exported="false" >
+108-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:22:13-37
+109            <intent-filter>
+109-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-25:29
+110                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+110-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:24:17-78
+110-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:24:25-75
+111            </intent-filter>
+112        </service>
+113
+114        <receiver
+114-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:28:9-35:20
+115            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingReceiver"
+115-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-98
+116            android:exported="true"
+116-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-36
+117            android:permission="com.google.android.c2dm.permission.SEND" >
+117-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:31:13-73
+118            <intent-filter>
+118-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:32:13-34:29
+119                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+119-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:33:17-81
+119-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:33:25-78
+120            </intent-filter>
+121        </receiver>
+122
+123        <provider
+123-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:43:9-47:38
+124            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingInitProvider"
+124-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:44:13-102
+125            android:authorities="com.wolvesvn.wolvesvn.flutterfirebasemessaginginitprovider"
+125-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:45:13-88
+126            android:exported="false"
+126-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:46:13-37
+127            android:initOrder="99" />
+127-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:47:13-35
+128
+129        <receiver
+129-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:16:9-18:40
+130            android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver"
+130-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-91
+131            android:exported="false" />
+131-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-37
+132        <receiver
+132-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:19:9-21:40
+133            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
+133-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-97
+134            android:exported="false" />
+134-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:21:13-37
+135        <receiver
+135-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:22:9-31:20
+136            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+136-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-101
+137            android:exported="false" >
+137-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-37
+138            <intent-filter>
+138-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:25:13-30:29
+139                <action android:name="android.intent.action.BOOT_COMPLETED" />
+139-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:26:17-79
+139-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:26:25-76
+140                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+140-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:27:17-84
+140-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:27:25-81
+141                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+141-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:28:17-82
+141-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:28:25-79
+142                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+142-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:29:17-82
+142-->[:flutter_local_notifications] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:29:25-79
+143            </intent-filter>
+144        </receiver>
+145
+146        <activity
+146-->[:url_launcher_android] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-13:74
+147            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+147-->[:url_launcher_android] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-74
+148            android:exported="false"
+148-->[:url_launcher_android] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-37
+149            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+149-->[:url_launcher_android] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-71
+150
+151        <uses-library
+151-->[androidx.window:window:1.0.0-beta04] /Users/tonsociu/.gradle/caches/transforms-3/86a1a9f6804c8fc691a553244f0de821/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+152            android:name="androidx.window.extensions"
+152-->[androidx.window:window:1.0.0-beta04] /Users/tonsociu/.gradle/caches/transforms-3/86a1a9f6804c8fc691a553244f0de821/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+153            android:required="false" />
+153-->[androidx.window:window:1.0.0-beta04] /Users/tonsociu/.gradle/caches/transforms-3/86a1a9f6804c8fc691a553244f0de821/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+154        <uses-library
+154-->[androidx.window:window:1.0.0-beta04] /Users/tonsociu/.gradle/caches/transforms-3/86a1a9f6804c8fc691a553244f0de821/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+155            android:name="androidx.window.sidecar"
+155-->[androidx.window:window:1.0.0-beta04] /Users/tonsociu/.gradle/caches/transforms-3/86a1a9f6804c8fc691a553244f0de821/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+156            android:required="false" />
+156-->[androidx.window:window:1.0.0-beta04] /Users/tonsociu/.gradle/caches/transforms-3/86a1a9f6804c8fc691a553244f0de821/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+157
+158        <activity
+158-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:29:9-46:20
+159            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+159-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:30:13-80
+160            android:excludeFromRecents="true"
+160-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:31:13-46
+161            android:exported="true"
+161-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:32:13-36
+162            android:launchMode="singleTask"
+162-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:33:13-44
+163            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+163-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:34:13-72
+164            <intent-filter>
+164-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:35:13-45:29
+165                <action android:name="android.intent.action.VIEW" />
+165-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:36:17-69
+165-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:36:25-66
+166
+167                <category android:name="android.intent.category.DEFAULT" />
+167-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:38:17-76
+167-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:38:27-73
+168                <category android:name="android.intent.category.BROWSABLE" />
+168-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:39:17-78
+168-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:39:27-75
+169
+170                <data
+170-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:41:17-44:51
+171                    android:host="firebase.auth"
+171-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:42:21-49
+172                    android:path="/"
+172-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:43:21-37
+173                    android:scheme="genericidp" />
+173-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:44:21-48
+174            </intent-filter>
+175        </activity>
+176        <activity
+176-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:47:9-64:20
+177            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+177-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:48:13-79
+178            android:excludeFromRecents="true"
+178-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:49:13-46
+179            android:exported="true"
+179-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:50:13-36
+180            android:launchMode="singleTask"
+180-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:51:13-44
+181            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+181-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:52:13-72
+182            <intent-filter>
+182-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:53:13-63:29
+183                <action android:name="android.intent.action.VIEW" />
+183-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:36:17-69
+183-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:36:25-66
+184
+185                <category android:name="android.intent.category.DEFAULT" />
+185-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:38:17-76
+185-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:38:27-73
+186                <category android:name="android.intent.category.BROWSABLE" />
+186-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:39:17-78
+186-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:39:27-75
+187
+188                <data
+188-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:41:17-44:51
+189                    android:host="firebase.auth"
+189-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:42:21-49
+190                    android:path="/"
+190-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:43:21-37
+191                    android:scheme="recaptcha" />
+191-->[com.google.firebase:firebase-auth:22.0.0] /Users/tonsociu/.gradle/caches/transforms-3/a3a5232b68606b060782797979f9ddc7/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:44:21-48
+192            </intent-filter>
+193        </activity>
+194
+195        <receiver
+195-->[com.google.firebase:firebase-messaging:23.1.2] /Users/tonsociu/.gradle/caches/transforms-3/6695f8f0ad91f18cd953f5c4d92afa41/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:31:9-38:20
+196            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+196-->[com.google.firebase:firebase-messaging:23.1.2] /Users/tonsociu/.gradle/caches/transforms-3/6695f8f0ad91f18cd953f5c4d92afa41/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:32:13-78
+197            android:exported="true"
+197-->[com.google.firebase:firebase-messaging:23.1.2] /Users/tonsociu/.gradle/caches/transforms-3/6695f8f0ad91f18cd953f5c4d92afa41/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:33:13-36
+198            android:permission="com.google.android.c2dm.permission.SEND" >
+198-->[com.google.firebase:firebase-messaging:23.1.2] /Users/tonsociu/.gradle/caches/transforms-3/6695f8f0ad91f18cd953f5c4d92afa41/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:34:13-73
+199            <intent-filter>
+199-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:32:13-34:29
+200                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+200-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:33:17-81
+200-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:33:25-78
+201            </intent-filter>
+202        </receiver>
+203        <!--
+204             FirebaseMessagingService performs security checks at runtime,
+205             but set to not exported to explicitly avoid allowing another app to call it.
+206        -->
+207        <service
+207-->[com.google.firebase:firebase-messaging:23.1.2] /Users/tonsociu/.gradle/caches/transforms-3/6695f8f0ad91f18cd953f5c4d92afa41/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:44:9-51:19
+208            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+208-->[com.google.firebase:firebase-messaging:23.1.2] /Users/tonsociu/.gradle/caches/transforms-3/6695f8f0ad91f18cd953f5c4d92afa41/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:45:13-82
+209            android:directBootAware="true"
+209-->[com.google.firebase:firebase-messaging:23.1.2] /Users/tonsociu/.gradle/caches/transforms-3/6695f8f0ad91f18cd953f5c4d92afa41/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:46:13-43
+210            android:exported="false" >
+210-->[com.google.firebase:firebase-messaging:23.1.2] /Users/tonsociu/.gradle/caches/transforms-3/6695f8f0ad91f18cd953f5c4d92afa41/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:47:13-37
+211            <intent-filter android:priority="-500" >
+211-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-25:29
+212                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+212-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:24:17-78
+212-->[:firebase_messaging] /Users/tonsociu/Desktop/WolvesVN/WolvesVN/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:24:25-75
+213            </intent-filter>
+214        </service>
+215
+216        <provider
+216-->[com.google.firebase:firebase-common:20.3.2] /Users/tonsociu/.gradle/caches/transforms-3/0d80e9c6f7604b4a9011703a89be7119/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:25:9-30:39
+217            android:name="com.google.firebase.provider.FirebaseInitProvider"
+217-->[com.google.firebase:firebase-common:20.3.2] /Users/tonsociu/.gradle/caches/transforms-3/0d80e9c6f7604b4a9011703a89be7119/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:26:13-77
+218            android:authorities="com.wolvesvn.wolvesvn.firebaseinitprovider"
+218-->[com.google.firebase:firebase-common:20.3.2] /Users/tonsociu/.gradle/caches/transforms-3/0d80e9c6f7604b4a9011703a89be7119/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:27:13-72
+219            android:directBootAware="true"
+219-->[com.google.firebase:firebase-common:20.3.2] /Users/tonsociu/.gradle/caches/transforms-3/0d80e9c6f7604b4a9011703a89be7119/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:28:13-43
+220            android:exported="false"
+220-->[com.google.firebase:firebase-common:20.3.2] /Users/tonsociu/.gradle/caches/transforms-3/0d80e9c6f7604b4a9011703a89be7119/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:29:13-37
+221            android:initOrder="100" />
+221-->[com.google.firebase:firebase-common:20.3.2] /Users/tonsociu/.gradle/caches/transforms-3/0d80e9c6f7604b4a9011703a89be7119/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:30:13-36
+222
+223        <activity
+223-->[com.google.android.gms:play-services-base:18.1.0] /Users/tonsociu/.gradle/caches/transforms-3/da1dfe8119b083456108cce9257fb942/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:9-22:45
+224            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+224-->[com.google.android.gms:play-services-base:18.1.0] /Users/tonsociu/.gradle/caches/transforms-3/da1dfe8119b083456108cce9257fb942/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:19-85
+225            android:exported="false"
+225-->[com.google.android.gms:play-services-base:18.1.0] /Users/tonsociu/.gradle/caches/transforms-3/da1dfe8119b083456108cce9257fb942/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:22:19-43
+226            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+226-->[com.google.android.gms:play-services-base:18.1.0] /Users/tonsociu/.gradle/caches/transforms-3/da1dfe8119b083456108cce9257fb942/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:21:19-78
+227
+228        <meta-data
+228-->[com.google.android.gms:play-services-basement:18.1.0] /Users/tonsociu/.gradle/caches/transforms-3/006bbe5a907188cb8f989af846bf78a4/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
+229            android:name="com.google.android.gms.version"
+229-->[com.google.android.gms:play-services-basement:18.1.0] /Users/tonsociu/.gradle/caches/transforms-3/006bbe5a907188cb8f989af846bf78a4/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
+230            android:value="@integer/google_play_services_version" />
+230-->[com.google.android.gms:play-services-basement:18.1.0] /Users/tonsociu/.gradle/caches/transforms-3/006bbe5a907188cb8f989af846bf78a4/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
+231
+232        <service
+232-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/tonsociu/.gradle/caches/transforms-3/24c5bfb1f8ea781637ef8bf0dde36d91/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:28:9-34:19
+233            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+233-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/tonsociu/.gradle/caches/transforms-3/24c5bfb1f8ea781637ef8bf0dde36d91/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:29:13-103
+234            android:exported="false" >
+234-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/tonsociu/.gradle/caches/transforms-3/24c5bfb1f8ea781637ef8bf0dde36d91/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:30:13-37
+235            <meta-data
+235-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/tonsociu/.gradle/caches/transforms-3/24c5bfb1f8ea781637ef8bf0dde36d91/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:31:13-33:39
+236                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+236-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/tonsociu/.gradle/caches/transforms-3/24c5bfb1f8ea781637ef8bf0dde36d91/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:32:17-94
+237                android:value="cct" />
+237-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/tonsociu/.gradle/caches/transforms-3/24c5bfb1f8ea781637ef8bf0dde36d91/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:33:17-36
+238        </service>
+239        <service
+239-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/tonsociu/.gradle/caches/transforms-3/edcfac4261cf7320c1761a1289a7fd30/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:26:9-30:19
+240            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+240-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/tonsociu/.gradle/caches/transforms-3/edcfac4261cf7320c1761a1289a7fd30/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:27:13-117
+241            android:exported="false"
+241-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/tonsociu/.gradle/caches/transforms-3/edcfac4261cf7320c1761a1289a7fd30/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:28:13-37
+242            android:permission="android.permission.BIND_JOB_SERVICE" >
+242-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/tonsociu/.gradle/caches/transforms-3/edcfac4261cf7320c1761a1289a7fd30/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:29:13-69
+243        </service>
+244
+245        <receiver
+245-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/tonsociu/.gradle/caches/transforms-3/edcfac4261cf7320c1761a1289a7fd30/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:32:9-34:40
+246            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+246-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/tonsociu/.gradle/caches/transforms-3/edcfac4261cf7320c1761a1289a7fd30/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:33:13-132
+247            android:exported="false" />
+247-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/tonsociu/.gradle/caches/transforms-3/edcfac4261cf7320c1761a1289a7fd30/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:34:13-37
+248    </application>
+249
+250</manifest>
