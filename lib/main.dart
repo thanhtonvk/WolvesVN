@@ -25,7 +25,9 @@ import 'models/vip.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   print("Handling a background message: ${message.messageId}");
 }
 
@@ -77,19 +79,31 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   NotificationService notificationService = NotificationService();
+  FirebaseDatabase database = FirebaseDatabase.instance;
+
+  Future<void> addToken(String value) async {
+    database.ref('Token').child(value).set(value).then((value) {
+      print('done');
+    }).onError((error, stackTrace) {
+      print('err');
+    }).catchError((Object obj) {
+      print('catch err');
+    });
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     notificationService.requestPermission();
-    notificationService.firebaseInit();
-    // notificationService.isTokenRefresh();
+    notificationService.firebaseInit(context);
+    notificationService.isTokenRefresh();
     notificationService.getDeviceToken().then((value) {
-      print('token: ${value}');
+      print('token ${value}');
+      addToken(value as String);
     });
-    // getData();
-    // startTimer();
+    getData();
+    startTimer();
   }
 
   @override

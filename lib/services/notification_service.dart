@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:app_settings/app_settings.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService {
@@ -13,11 +15,10 @@ class NotificationService {
 
   void initLocalNotification(
       BuildContext context, RemoteMessage remoteMessage) async {
-    var androidInit =
-        const AndroidInitializationSettings('@mipmap/ic_launcher');
+    var androidInit = const AndroidInitializationSettings('app_icon');
     var iosInit = const DarwinInitializationSettings();
-    var initSetting =
-        InitializationSettings(android: androidInit, iOS: iosInit,macOS: iosInit);
+    var initSetting = InitializationSettings(
+        android: androidInit, iOS: iosInit, macOS: iosInit);
     await flutterLocalNotificationsPlugin.initialize(initSetting,
         onDidReceiveBackgroundNotificationResponse: (payload) {});
   }
@@ -56,15 +57,17 @@ class NotificationService {
   }
 
   Future<void> showNotification(RemoteMessage message) async {
-    AndroidNotificationChannel channel = AndroidNotificationChannel(
-        Random.secure().nextInt(100000).toString(), "high_importance_channel",
+    AndroidNotificationChannel channel = const AndroidNotificationChannel(
+        '280301', "high_importance_channel",
         importance: Importance.max);
     AndroidNotificationDetails androidNotificationDetails =
-        AndroidNotificationDetails(channel.id.toString(), channel.name.toString(),
+        AndroidNotificationDetails(
+            channel.id.toString(), channel.name.toString(),
             channelDescription: "Tin tức, tín hiệu, ...",
-            importance: Importance.max,
-            priority: Priority.max,
-            ticker: 'ticker');
+            importance: Importance.high,
+            priority: Priority.high,
+            ticker: 'ticker',
+            enableVibration: true);
     DarwinNotificationDetails darwinNotificationDetails =
         const DarwinNotificationDetails(
             presentAlert: true, presentBadge: true, presentSound: true);
@@ -74,16 +77,38 @@ class NotificationService {
     Future.delayed(Duration.zero, () {
       flutterLocalNotificationsPlugin.show(0, message.notification?.title,
           message.notification?.body, notificationDetails);
+      flutterLocalNotificationsPlugin.show(
+        DateTime.now().millisecond,
+        message.notification?.title,
+        message.notification?.body,
+        notificationDetails,
+        payload: json.encode(message.data),
+      );
     });
   }
 
-  void firebaseInit() {
+  void firebaseInit(BuildContext context) {
+   messaging.subscribeToTopic('thongbao');
     FirebaseMessaging.onMessage.listen((event) {
       if (kDebugMode) {
         print(event.notification?.title.toString());
         print(event.notification?.body.toString());
       }
-      showNotification(event);
+
+      try {
+        showNotification(event);
+      } catch (e) {
+        final snackbar = SnackBar(
+          content: Text(event.notification!.body.toString()),
+          action: SnackBarAction(
+            label: event.notification!.title.toString(),
+            onPressed: () {},
+          ),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackbar);
+      }
+    }).onError((Object obj) {
+      print('err');
     });
   }
 }
