@@ -20,7 +20,9 @@ class NotificationService {
     var initSetting = InitializationSettings(
         android: androidInit, iOS: iosInit, macOS: iosInit);
     await flutterLocalNotificationsPlugin.initialize(initSetting,
-        onDidReceiveBackgroundNotificationResponse: (payload) {});
+        onDidReceiveBackgroundNotificationResponse: (payload) {
+      print(payload.input as String);
+    });
   }
 
   void requestPermission() async {
@@ -88,7 +90,7 @@ class NotificationService {
   }
 
   void firebaseInit(BuildContext context) {
-   messaging.subscribeToTopic('thongbao');
+    messaging.subscribeToTopic('thongbao');
     FirebaseMessaging.onMessage.listen((event) {
       if (kDebugMode) {
         print(event.notification?.title.toString());

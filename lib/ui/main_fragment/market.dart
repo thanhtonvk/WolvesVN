@@ -26,7 +26,7 @@ class MarketState extends State<MarketUI> {
       logo = 'assets/images/logo.png';
     }
     return Scaffold(
-        backgroundColor: Colors.black54,
+        backgroundColor: Colors.black,
         body: SafeArea(
             child: Column(
           children: [
@@ -61,7 +61,7 @@ class MarketState extends State<MarketUI> {
               endIndent: 5,
             ),
             SizedBox(
-              height: 20,
+              height: 25,
               child: Container(
                 margin: const EdgeInsets.only(right: 10),
                 alignment: Alignment.topRight,
