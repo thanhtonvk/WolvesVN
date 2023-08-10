@@ -26,6 +26,7 @@ class GeneralPage extends StatelessWidget {
         backgroundColor: Colors.black54,
         body: SafeArea(
             child: Container(
+              color: Colors.black87,
           margin: const EdgeInsets.only(left: 5, right: 5),
           child: Column(
             children: [

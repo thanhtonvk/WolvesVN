@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:wolvesvn/models/sangiaodich.dart';
@@ -13,7 +14,6 @@ import 'package:wolvesvn/ui/play_video.dart';
 import '../../generated/common.dart';
 import '../../models/wolves_news.dart';
 import '../tin_tuc_wolves.dart';
-import '../xau_page.dart';
 
 class NewsPage extends StatelessWidget {
   const NewsPage({super.key});
@@ -21,60 +21,62 @@ class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DefaultTabController(
-        length: 5,
-        child: Scaffold(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
           backgroundColor: Colors.black54,
-          appBar: AppBar(
+          body: DefaultTabController(
+            length: 5,
+            child: Scaffold(
               backgroundColor: Colors.black54,
-              bottom: const TabBar(
-                tabs: [
-                  Tab(
-                    text: 'HOT',
+              appBar: AppBar(
+                  backgroundColor: Colors.black54,
+                  bottom: const TabBar(
+                    tabs: [
+                      Tab(
+                        text: 'HOT',
+                      ),
+                      Tab(
+                        text: 'Tin tức',
+                      ),
+                      Tab(
+                        text: 'Wolves',
+                      ),
+                      Tab(
+                        text: 'EA',
+                      ),
+                      Tab(
+                        text: 'Video',
+                      )
+                    ],
                   ),
-                  Tab(
-                    text: 'Tin tức',
-                  ),
-                  Tab(
-                    text: 'Wolves',
-                  ),
-                  Tab(
-                    text: 'EA',
-                  ),
-                  Tab(
-                    text: 'Video',
-                  )
+                  title: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.feed_outlined,
+                        color: Colors.orange,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Tin tức",
+                        style: TextStyle(color: Colors.white),
+                      )
+                    ],
+                  )),
+              body: TabBarView(
+                children: [
+                  VipNews(),
+                  NormalNews(),
+                  WolvesNewsPage(),
+                  SanGiaoDichPage(),
+                  VideoPage()
                 ],
               ),
-              title: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.feed_outlined,
-                    color: Colors.orange,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Tin tức",
-                    style: TextStyle(color: Colors.white),
-                  )
-                ],
-              )),
-          body: TabBarView(
-            children: [
-              VipNews(),
-              NormalNews(),
-              WolvesNewsPage(),
-              SanGiaoDichPage(),
-              VideoPage()
-            ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
 
@@ -96,7 +98,10 @@ class VipNews extends StatelessWidget {
     var today = DateTime.now();
     var dateFormat = DateFormat('yyyy-MM-dd');
     String currentDate = dateFormat.format(today);
-    // currentDate = '2023-07-07';
+    if (Common.ACCOUNT.Email as String == 'WolvesVNteam@gmail.com') {
+      currentDate = '2023-07-07';
+    }
+
     DatabaseReference ref = database.ref('NewsVip').child(currentDate);
     List<TinTuc> newsList = [];
     return StreamBuilder(
@@ -112,56 +117,60 @@ class VipNews extends StatelessWidget {
             newsList.add(tinTuc);
           }
           newsList = newsList.reversed.toList();
-          return Expanded(
-              child: ListView.builder(
-            itemCount: newsList.length,
-            itemBuilder: (context, index) {
-              TinTuc news = newsList[index];
-              return Container(
-                margin: const EdgeInsets.all(10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+          return Row(
+            children: [
+              Expanded(
+                  child: ListView.builder(
+                itemCount: newsList.length,
+                itemBuilder: (context, index) {
+                  TinTuc news = newsList[index];
+                  return Container(
+                    margin: const EdgeInsets.all(10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          news.Date,
-                          style: const TextStyle(color: Colors.white),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              news.Date,
+                              style: const TextStyle(color: Colors.white),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                news.Content,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                              ),
+                            ]),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              news.Time,
+                              style: const TextStyle(color: Colors.white),
+                            )
+                          ],
                         )
                       ],
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            news.Content,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          ),
-                        ]),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          news.Time,
-                          style: const TextStyle(color: Colors.white),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              );
-            },
-          ));
+                  );
+                },
+              ))
+            ],
+          );
         }
         return Container();
       },
@@ -179,6 +188,10 @@ class NormalNews extends StatelessWidget {
     var today = DateTime.now();
     var dateFormat = DateFormat('yyyy-MM-dd');
     String currentDate = dateFormat.format(today);
+    if (Common.ACCOUNT.Email as String == 'WolvesVNteam@gmail.com') {
+      currentDate = '2023-07-07';
+    }
+
     DatabaseReference ref = database.ref('News').child(currentDate);
     List<TinTuc> newsList = [];
     return StreamBuilder(
@@ -258,8 +271,7 @@ class WolvesNewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-      FutureBuilder<Widget>(
+    return FutureBuilder<Widget>(
       future: listWolvesNews(),
       builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -295,62 +307,65 @@ class WolvesNewsPage extends StatelessWidget {
     ).catchError((Object obj) {
       print('err');
     });
-    return Expanded(
-        child: ListView.builder(
-      itemCount: wolvesNewsList.length,
-      itemBuilder: (context, index) {
-        WolvesNews wolvesNews = wolvesNewsList[index];
-        return GestureDetector(
-          onTap: () {
-            Common.wolvesNews = wolvesNews;
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const TinTucWolvesPage(),
-            ));
-          },
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+    return Column(
+      children: [
+        Expanded(
+            child: ListView.builder(
+          itemCount: wolvesNewsList.length,
+          itemBuilder: (context, index) {
+            WolvesNews wolvesNews = wolvesNewsList[index];
+            return GestureDetector(
+              onTap: () {
+                Common.wolvesNews = wolvesNews;
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const TinTucWolvesPage(),
+                ));
+              },
+              child: Column(
                 children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        wolvesNews.Date.split('T')[0],
+                        style: const TextStyle(color: Colors.white),
+                      )
+                    ],
+                  ),
                   Text(
-                    wolvesNews.Date.split('T')[0],
-                    style: const TextStyle(color: Colors.white),
-                  )
+                    wolvesNews.Titile,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                    textAlign: TextAlign.left,
+                  ),
+                  FittedBox(
+                    fit: BoxFit.fill,
+                    child: Image.network(
+                      wolvesNews.Image,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Divider(
+                    color: Colors.white,
+                    height: 10,
+                    thickness: 1,
+                    indent: 5,
+                    endIndent: 5,
+                  ),
                 ],
               ),
-              Text(
-                wolvesNews.Titile,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-                textAlign: TextAlign.left,
-              ),
-
-              FittedBox(
-                fit: BoxFit.fill,
-                child: Image.network(
-                  wolvesNews.Image,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              const Divider(
-                color: Colors.white,
-                height: 10,
-                thickness: 1,
-                indent: 5,
-                endIndent: 5,
-              ),
-            ],
-          ),
-        );
-      },
-    ));
+            );
+          },
+        ))
+      ],
+    );
   }
 }
 
@@ -367,7 +382,7 @@ class VideoPage extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // Show a loading indicator while waiting for the future to complete
-          return Center(
+          return const Center(
               child: SizedBox(
                   width: 50, height: 50, child: CircularProgressIndicator()));
         } else if (snapshot.hasError) {
@@ -393,51 +408,59 @@ class VideoPage extends StatelessWidget {
       },
     ).onError(
       (error, stackTrace) {
-        print(error);
+        if (kDebugMode) {
+          print(error);
+        }
       },
     ).catchError((Object obj) {
-      print('err');
+      if (kDebugMode) {
+        print('err');
+      }
     });
-    return Expanded(
-        child: ListView.builder(
-      itemCount: videoList.length,
-      itemBuilder: (context, index) {
-        Video video = videoList[index];
-        return GestureDetector(
-          onTap: () {
-            Common.video = video;
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const MyPlayVideo()),
+    return Column(
+      children: [
+        Expanded(
+            child: ListView.builder(
+          itemCount: videoList.length,
+          itemBuilder: (context, index) {
+            Video video = videoList[index];
+            return GestureDetector(
+              onTap: () {
+                Common.video = video;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyPlayVideo()),
+                );
+              },
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(video.Content,
+                        style: const TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.left),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Divider(
+                      color: Colors.white,
+                      height: 10,
+                      thickness: 1,
+                      indent: 5,
+                      endIndent: 5,
+                    ),
+                  ],
+                ),
+              ),
             );
           },
-          child: Container(
-            margin: const EdgeInsets.all(10),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(video.Content,
-                    style: const TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.left),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Divider(
-                  color: Colors.white,
-                  height: 10,
-                  thickness: 1,
-                  indent: 5,
-                  endIndent: 5,
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    ));
+        ))
+      ],
+    );
   }
 }
 
@@ -485,44 +508,48 @@ class SanGiaoDichPage extends StatelessWidget {
     ).catchError((Object obj) {
       print('err');
     });
-    return Expanded(
-        child: ListView.builder(
-      itemCount: sanGiaoDichList.length,
-      itemBuilder: (context, index) {
-        SanGiaoDich sanGiaoDich = sanGiaoDichList[index];
-        return GestureDetector(
-          onTap: () {
-            Common.sanGiaoDich = sanGiaoDich;
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const MyEAPage()),
+    return Column(
+      children: [
+        Expanded(
+            child: ListView.builder(
+          itemCount: sanGiaoDichList.length,
+          itemBuilder: (context, index) {
+            SanGiaoDich sanGiaoDich = sanGiaoDichList[index];
+            return GestureDetector(
+              onTap: () {
+                Common.sanGiaoDich = sanGiaoDich;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyEAPage()),
+                );
+              },
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      sanGiaoDich.Titile,
+                      style: const TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Divider(
+                      color: Colors.white,
+                      height: 10,
+                      thickness: 1,
+                      indent: 5,
+                      endIndent: 5,
+                    ),
+                  ],
+                ),
+              ),
             );
           },
-          child: Container(
-            margin: const EdgeInsets.all(10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  sanGiaoDich.Titile,
-                  style: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Divider(
-                  color: Colors.white,
-                  height: 10,
-                  thickness: 1,
-                  indent: 5,
-                  endIndent: 5,
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    ));
+        ))
+      ],
+    );
   }
 }

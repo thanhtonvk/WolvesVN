@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:wolvesvn/models/gold.dart';
@@ -15,6 +16,7 @@ class SignalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      color: Colors.black54,
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
         length: 3,
@@ -66,7 +68,7 @@ class GoldPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+      color: Colors.black87,
       child: getGold(),
     );
   }
@@ -77,6 +79,9 @@ class GoldPage extends StatelessWidget {
     var today = DateTime.now();
     var dateFormat = DateFormat('yyyy-M-d');
     String currentDate = dateFormat.format(today);
+    if (Common.ACCOUNT.Email as String == 'WolvesVNteam@gmail.com') {
+      currentDate = '2023-7-21';
+    }
     DatabaseReference reference = database.ref('Golds').child(currentDate);
     return StreamBuilder(
       stream: reference.onValue,
@@ -91,56 +96,67 @@ class GoldPage extends StatelessWidget {
             goldList.add(gold);
           }
           goldList = goldList.reversed.toList();
-          return Expanded(
-              child: ListView.builder(
-            itemCount: goldList.length,
-            itemBuilder: (context, index) {
-              Gold gold = goldList[index];
-              return GestureDetector(
-                onTap: () {
-                  Common.gold = gold;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => XAUPage()),
-                  );
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          gold.Date!.split('T')[0],
-                          style: const TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Column(children: [
-                      Text(
-                        gold.Symbol as String,
-                        style: const TextStyle(
-                            color: Colors.green, fontWeight: FontWeight.bold),
+          return Container(
+            margin: const EdgeInsets.all(10),
+            child: Row(
+              children: [
+                Expanded(
+                    child: ListView.builder(
+                  itemCount: goldList.length,
+                  itemBuilder: (context, index) {
+                    Gold gold = goldList[index];
+                    return Container(
+                      margin: const EdgeInsets.all(10),
+                      child: GestureDetector(
+                        onTap: () {
+                          Common.gold = gold;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => XAUPage()),
+                          );
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  gold.Date!.split('T')[0],
+                                  style: const TextStyle(color: Colors.white),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Column(children: [
+                              Text(
+                                gold.Symbol as String,
+                                style: const TextStyle(
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ]),
+                            const Divider(
+                              color: Colors.white,
+                              height: 10,
+                              thickness: 1,
+                              indent: 5,
+                              endIndent: 5,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            )
+                          ],
+                        ),
                       ),
-                    ]),
-                    const Divider(
-                      color: Colors.white,
-                      height: 10,
-                      thickness: 1,
-                      indent: 5,
-                      endIndent: 5,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    )
-                  ],
-                ),
-              );
-            },
-          ));
+                    );
+                  },
+                ))
+              ],
+            ),
+          );
         }
         return Container();
       },
@@ -154,7 +170,7 @@ class WolvesSignalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+      color: Colors.black87,
       child: wolvesSignal(),
     );
   }
@@ -165,6 +181,9 @@ class WolvesSignalPage extends StatelessWidget {
     var today = DateTime.now();
     var dateFormat = DateFormat('yyyy-M-d');
     String currentDate = dateFormat.format(today);
+    if (Common.ACCOUNT.Email as String == 'WolvesVNteam@gmail.com') {
+      currentDate = '2023-7-5';
+    }
     DatabaseReference ref = database.ref('TinHieuPost').child(currentDate);
     return StreamBuilder(
       stream: ref.onValue,
@@ -179,71 +198,79 @@ class WolvesSignalPage extends StatelessWidget {
             signalList.add(signal);
           }
           signalList = signalList.reversed.toList();
-          return Expanded(
-              child: ListView.builder(
-                  itemCount: signalList.length,
-                  itemBuilder: (context, index) {
-                    Signal signal = signalList[index];
-                    return Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              signal.Date!.split('T')[0],
-                              style: const TextStyle(color: Colors.white),
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Center(
-                          child: Text(
-                            signal.Content as String,
-                            style: const TextStyle(
-                                color: Colors.green,
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.start,
+          return Row(
+            children: [
+              Expanded(
+                  child: ListView.builder(
+                      itemCount: signalList.length,
+                      itemBuilder: (context, index) {
+                        Signal signal = signalList[index];
+                        return Container(
+                          margin: const EdgeInsets.only(
+                              left: 20, right: 20, top: 10, bottom: 10),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    signal.Date!.split('T')[0],
+                                    style: const TextStyle(color: Colors.white),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Center(
+                                child: Text(
+                                  signal.Content as String,
+                                  style: const TextStyle(
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.start,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "TP: ${signal.TP}",
+                                    style: const TextStyle(color: Colors.white),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "SL: ${signal.SL}",
+                                    style: const TextStyle(color: Colors.white),
+                                  )
+                                ],
+                              ),
+                              const Divider(
+                                color: Colors.white,
+                                height: 10,
+                                thickness: 1,
+                                indent: 5,
+                                endIndent: 5,
+                              ),
+                            ],
                           ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "TP: ${signal.TP}",
-                              style: const TextStyle(color: Colors.white),
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "SL: ${signal.SL}",
-                              style: const TextStyle(color: Colors.white),
-                            )
-                          ],
-                        ),
-                        const Divider(
-                          color: Colors.white,
-                          height: 10,
-                          thickness: 1,
-                          indent: 5,
-                          endIndent: 5,
-                        ),
-                      ],
-                    );
-                  }));
+                        );
+                      }))
+            ],
+          );
         }
         return Container();
       },
@@ -261,6 +288,10 @@ class SignalVipPage extends StatelessWidget {
     var today = DateTime.now();
     var dateFormat = DateFormat('yyyy-MM-dd');
     String currentDate = dateFormat.format(today);
+    if (Common.ACCOUNT.Email as String == 'WolvesVNteam@gmail.com') {
+      currentDate = '2023-07-07';
+    }
+
     DatabaseReference ref = database.ref('BanLenh').child(currentDate);
     return StreamBuilder(
       stream: ref.onValue,
@@ -276,79 +307,91 @@ class SignalVipPage extends StatelessWidget {
               signalList.add(signal);
             }
             signalList = signalList.reversed.toList();
-            return Expanded(
-                child: ListView.builder(
-              itemCount: signalList.length,
-              itemBuilder: (context, index) {
-                Signal signal = signalList[index];
-                return Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          signal.Date!.split('T')[0],
-                          style: const TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    FittedBox(
-                      fit: BoxFit.fill,
-                      child: Image.network(
-                        signal.Image as String,
+            return Row(
+              children: [
+                Expanded(
+                    child: ListView.builder(
+                  itemCount: signalList.length,
+                  itemBuilder: (context, index) {
+                    if (kDebugMode) {
+                      print('length ${signalList.length}');
+                    }
+                    Signal signal = signalList[index];
+                    return Container(
+                      margin: EdgeInsets.only(
+                          left: 20, right: 20, top: 10, bottom: 10),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                signal.Date!.split('T')[0],
+                                style: const TextStyle(color: Colors.white),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Image.network(
+                              signal.Image as String,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                signal.Content as String,
+                                style: const TextStyle(
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "TP: ${signal.TP}",
+                                style: const TextStyle(color: Colors.white),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "SL: ${signal.SL}",
+                                style: const TextStyle(color: Colors.white),
+                              )
+                            ],
+                          ),
+                          const Divider(
+                            color: Colors.white,
+                            height: 10,
+                            thickness: 1,
+                            indent: 5,
+                            endIndent: 5,
+                          ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          signal.Content as String,
-                          style: const TextStyle(
-                              color: Colors.green, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "TP: ${signal.TP}",
-                          style: const TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "SL: ${signal.SL}",
-                          style: const TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                    const Divider(
-                      color: Colors.white,
-                      height: 10,
-                      thickness: 1,
-                      indent: 5,
-                      endIndent: 5,
-                    ),
-                  ],
-                );
-              },
-            ));
+                    );
+                  },
+                ))
+              ],
+            );
           } else {
             return Container();
           }
@@ -362,7 +405,7 @@ class SignalVipPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+      color: Colors.black87,
       child: wolvesSignal(),
     );
   }

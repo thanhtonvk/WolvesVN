@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:math';
+import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -41,7 +41,7 @@ class NotificationService {
       print('user grant provisional permisison');
     } else {
       print('user denied permission');
-      AppSettings.openAppSettings();
+      // AppSettings.openAppSettings();
     }
   }
 
@@ -74,7 +74,7 @@ class NotificationService {
         const DarwinNotificationDetails(
             presentAlert: true, presentBadge: true, presentSound: true);
     NotificationDetails notificationDetails = NotificationDetails(
-        android: androidNotificationDetails, iOS: darwinNotificationDetails);
+        android: androidNotificationDetails, iOS: darwinNotificationDetails,macOS: darwinNotificationDetails);
 
     Future.delayed(Duration.zero, () {
       flutterLocalNotificationsPlugin.show(0, message.notification?.title,
@@ -96,21 +96,19 @@ class NotificationService {
         print(event.notification?.title.toString());
         print(event.notification?.body.toString());
       }
-
-      try {
+      if (Platform.isIOS) {
+        foregroundMessage();
+      } else {
         showNotification(event);
-      } catch (e) {
-        final snackbar = SnackBar(
-          content: Text(event.notification!.body.toString()),
-          action: SnackBarAction(
-            label: event.notification!.title.toString(),
-            onPressed: () {},
-          ),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackbar);
       }
     }).onError((Object obj) {
       print('err');
     });
+  }
+
+  Future foregroundMessage() async {
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
+        alert: true, badge: true, sound: true);
   }
 }

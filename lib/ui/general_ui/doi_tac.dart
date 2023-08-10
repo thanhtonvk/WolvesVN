@@ -81,32 +81,36 @@ class DoiTacState extends State<MyDoiTac> {
     ).catchError((Object obj) {
       print(obj);
     });
-    return Expanded(
-      child: ListView.builder(
-        itemCount: doiTacList.length,
-        itemBuilder: (context, index) {
-          DoiTac doiTac = doiTacList[index];
-          return Column(
-            children: [
-              ListTile(
-                onTap: () {
-                  openBrowser(doiTac.TrangWeb);
-                },
-                title: Text(
-                  doiTac.TenDoiTac,
-                  style: const TextStyle(
-                      color: Colors.orange, fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(
-                  doiTac.ThongTinKhac,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
-              const Divider(height: 0),
-            ],
-          );
-        },
-      ),
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            itemCount: doiTacList.length,
+            itemBuilder: (context, index) {
+              DoiTac doiTac = doiTacList[index];
+              return Column(
+                children: [
+                  ListTile(
+                    onTap: () {
+                      openBrowser(doiTac.TrangWeb);
+                    },
+                    title: Text(
+                      doiTac.TenDoiTac,
+                      style: const TextStyle(
+                          color: Colors.orange, fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                      doiTac.ThongTinKhac,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  const Divider(height: 0),
+                ],
+              );
+            },
+          ),
+        )
+      ],
     );
   }
 }

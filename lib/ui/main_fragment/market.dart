@@ -1,6 +1,4 @@
-import 'dart:convert';
 
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -29,48 +27,49 @@ class MarketState extends State<MarketUI> {
         backgroundColor: Colors.black,
         body: SafeArea(
             child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(
-                  logo,
-                  width: 80,
-                  height: 80,
-                  fit: BoxFit.contain,
-                  scale: 0.1,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      logo,
+                      width: 80,
+                      height: 80,
+                      fit: BoxFit.contain,
+                      scale: 0.1,
+                    ),
+                    Container(
+                      width: 200,
+                      margin: const EdgeInsets.only(left: 10),
+                      child: Column(
+                        children: [
+                          showInformation("Tên",
+                              ": ${Common.ACCOUNT.FirstName} ${Common.ACCOUNT
+                                  .LastName}"),
+                          showInformation("ID", ": ${Common.ACCOUNT.Id}")
+                        ],
+                      ),
+                    )
+                  ],
                 ),
-                Container(
-                  width: 200,
-                  margin: const EdgeInsets.only(left: 10),
-                  child: Column(
-                    children: [
-                      showInformation("Tên",
-                          ": ${Common.ACCOUNT.FirstName} ${Common.ACCOUNT.LastName}"),
-                      showInformation("ID", ": ${Common.ACCOUNT.Id}")
-                    ],
+                const Divider(
+                  color: Colors.white,
+                  height: 10,
+                  thickness: 1,
+                  indent: 5,
+                  endIndent: 5,
+                ),
+                SizedBox(
+                  height: 25,
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    alignment: Alignment.topRight,
+                    child: dropoutWidget(),
                   ),
-                )
+                ),
+                listView()
               ],
-            ),
-            const Divider(
-              color: Colors.white,
-              height: 10,
-              thickness: 1,
-              indent: 5,
-              endIndent: 5,
-            ),
-            SizedBox(
-              height: 25,
-              child: Container(
-                margin: const EdgeInsets.only(right: 10),
-                alignment: Alignment.topRight,
-                child: dropoutWidget(),
-              ),
-            ),
-            listView()
-          ],
-        )));
+            )));
   }
 
   @override
@@ -111,6 +110,7 @@ class MarketState extends State<MarketUI> {
     );
   }
 
+
   Widget listView() {
     controller.setJavaScriptMode(JavaScriptMode.unrestricted);
     controller.setBackgroundColor(Colors.black);
@@ -130,8 +130,8 @@ class MarketState extends State<MarketUI> {
           // controller.loadHtmlString();
           return Expanded(
               child: WebViewWidget(
-            controller: controller,
-          ));
+                controller: controller,
+              ));
         } else {
           return Container();
         }
@@ -149,7 +149,7 @@ class MarketState extends State<MarketUI> {
         Text(
           content,
           style:
-              const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         )
       ],
     );

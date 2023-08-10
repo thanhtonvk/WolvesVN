@@ -137,6 +137,9 @@ class StatisticPage extends StatelessWidget {
     var today = DateTime.now();
     var dateFormat = DateFormat('yyyy-M-d');
     String currentDate = dateFormat.format(today);
+    if(Common.ACCOUNT.Email as String == 'WolvesVNteam@gmail.com'){
+      currentDate = '2023-5-24';
+    }
     DatabaseReference ref = database.ref('TongPIP').child(currentDate);
     List<TongPip> tongPips = [];
     return StreamBuilder(
