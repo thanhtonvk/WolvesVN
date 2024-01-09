@@ -5,11 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:wolvesvn/services/notification_service.dart';
+import 'package:wolvesvn/ui/main_fragment/exchanges.dart';
 import 'package:wolvesvn/ui/main_fragment/general.dart';
 import 'package:wolvesvn/ui/main_fragment/market.dart';
 import 'package:wolvesvn/ui/main_fragment/news.dart';
 import 'package:wolvesvn/ui/main_fragment/signal.dart';
-import 'package:wolvesvn/ui/main_fragment/statistic.dart';
 
 import '../generated/common.dart';
 import '../models/vip.dart';
@@ -30,7 +30,7 @@ class MainPageHomeState extends State<MainPage> {
   Widget marketPage = MarketPage();
   Widget newsPage = NewsPage();
   Widget signalPage = SignalPage();
-  Widget statisticPage = StatisticPage();
+  Widget exchanges = ExchangesPage();
   ApiServices apiServices =
       ApiServices(Dio(BaseOptions(contentType: 'application/json')));
 
@@ -132,7 +132,11 @@ class MainPageHomeState extends State<MainPage> {
                 tooltip: "Tín hiệu",
                 label: "."),
             BottomNavigationBarItem(
-                icon: Icon(Icons.pie_chart), tooltip: "Thống kê", label: "."),
+                icon: Icon(
+                  Icons.candlestick_chart_outlined,
+                ),
+                tooltip: "Sàn",
+                label: "."),
             BottomNavigationBarItem(
                 icon: Icon(Icons.feed), tooltip: "Tin tức", label: "."),
             BottomNavigationBarItem(
@@ -157,7 +161,7 @@ class MainPageHomeState extends State<MainPage> {
       case 1:
         return signalPage;
       case 2:
-        return statisticPage;
+        return exchanges;
       case 3:
         return newsPage;
       case 4:

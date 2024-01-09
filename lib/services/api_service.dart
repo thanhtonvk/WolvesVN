@@ -2,15 +2,19 @@ import 'package:retrofit/http.dart';
 import 'package:dio/dio.dart';
 import 'package:wolvesvn/models/account.dart';
 import 'package:wolvesvn/models/doitac.dart';
+import 'package:wolvesvn/models/quangcao.dart';
 import 'package:wolvesvn/models/sangiaodich.dart';
+import 'package:wolvesvn/models/tongpip.dart';
 import 'package:wolvesvn/models/video.dart';
 import 'package:wolvesvn/models/vip.dart';
 
+import '../models/rating.dart';
+import '../models/san.dart';
 import '../models/wolves_news.dart';
 
 part 'api_service.g.dart';
 
-@RestApi(baseUrl: "http://wolves-vn.ddns.net/")
+@RestApi(baseUrl: "http://139.99.116.68/")
 abstract class ApiServices {
   factory ApiServices(Dio dio) = _ApiServices;
 
@@ -22,7 +26,7 @@ abstract class ApiServices {
   Future register(@Body() Account account);
 
   @GET('/Symbol/get-symbol')
-  Future<String> getSymbols();
+  Future<List<String>> getSymbols();
 
   @POST('account/forgot-password')
   Future forgotAccount(@Query("email") String email);
@@ -50,6 +54,19 @@ abstract class ApiServices {
 
   @GET('api/DoiTac')
   Future<List<DoiTac>> getDoiTacs();
+
   @POST('account/block')
   Future blockAccount(@Query("id") int id);
+
+  @GET('quangcao/get-quang-cao')
+  Future<List<QuangCao>> getQuangCaos();
+
+  @GET("tongpip/get")
+  Future<List<TongPip>> getTongPips();
+
+  @GET("api/Sans")
+  Future<List<San>> getSans();
+
+  @GET('api/Ratings')
+  Future<List<Rating>> getRatings(@Query("idSan") int idSan);
 }

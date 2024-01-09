@@ -4,6 +4,7 @@ import 'package:wolvesvn/models/sangiaodich.dart';
 import 'package:wolvesvn/models/wolves_news.dart';
 
 import '../models/gold.dart';
+import '../models/san.dart';
 import '../models/video.dart';
 
 class Common {
@@ -21,7 +22,8 @@ class Common {
   static String pip = '';
   static String trades = '';
   static String winRate = '';
-
+  static String money = '';
+  static late San san;
   static void showLoadingDialog(BuildContext context, String text) {
     showDialog(
       context: context,

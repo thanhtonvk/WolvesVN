@@ -1,14 +1,14 @@
-import 'package:firebase_core/firebase_core.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:wolvesvn/models/gold.dart';
 import 'package:wolvesvn/models/signal.dart';
-import 'package:wolvesvn/ui/xau_page.dart';
 
 import '../../generated/common.dart';
+import '../../models/tongpip.dart';
+import '../../services/api_service.dart';
 
 class SignalPage extends StatelessWidget {
   const SignalPage({super.key});
@@ -16,150 +16,51 @@ class SignalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      color: Colors.black54,
+      color: Colors.black,
       debugShowCheckedModeBanner: false,
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          backgroundColor: Colors.black54,
-          appBar: AppBar(
-              backgroundColor: Colors.black54,
-              bottom: const TabBar(
-                tabs: [
-                  Tab(
-                    text: 'Tín hiệu',
-                  ),
-                  Tab(
-                    text: 'Tín hiệu wolves',
-                  ),
-                  Tab(
-                    text: 'XAU/GOLD',
-                  ),
-                ],
-              ),
-              title: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.wifi_tethering_outlined,
-                    color: Colors.orange,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Tín hiệu",
-                    style: TextStyle(color: Colors.white),
-                  )
-                ],
-              )),
-          body: TabBarView(
-            children: [SignalVipPage(), WolvesSignalPage(), GoldPage()],
+      home: Container(
+        color: Colors.black,
+        child: DefaultTabController(
+          length: 3,
+          child: Scaffold(
+            backgroundColor: Colors.black,
+            appBar: AppBar(
+                backgroundColor: Colors.black,
+                bottom: const TabBar(
+                  tabs: [
+                    Tab(
+                      text: 'Tín hiệu',
+                    ),
+                    Tab(
+                      text: 'Tín hiệu wolves',
+                    ),
+                    Tab(
+                      text: 'Thống kê',
+                    )
+                  ],
+                ),
+                title: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.wifi_tethering_outlined,
+                      color: Colors.orange,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Tín hiệu",
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
+                )),
+            body: TabBarView(
+              children: [SignalVipPage(), WolvesSignalPage(), StatisticPage()],
+            ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class GoldPage extends StatelessWidget {
-  const GoldPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black87,
-      child: getGold(),
-    );
-  }
-
-  Widget getGold() {
-    List<Gold> goldList = [];
-    FirebaseDatabase database = FirebaseDatabase.instance;
-    var today = DateTime.now();
-    var dateFormat = DateFormat('yyyy-M-d');
-    String currentDate = dateFormat.format(today);
-    if (Common.ACCOUNT.Email as String == 'WolvesVNteam@gmail.com') {
-      currentDate = '2023-7-21';
-    }
-    DatabaseReference reference = database.ref('Golds').child(currentDate);
-    return StreamBuilder(
-      stream: reference.onValue,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          goldList.clear();
-          var dataSnapshot = snapshot.data!.snapshot.children;
-          for (var val in dataSnapshot) {
-            var value = val.value as Map<dynamic, dynamic>;
-            Gold gold = Gold(value['BuyInto'], value['Content'], value['Date'],
-                value['Id'], value['SoldOut'], value['Symbol']);
-            goldList.add(gold);
-          }
-          goldList = goldList.reversed.toList();
-          return Container(
-            margin: const EdgeInsets.all(10),
-            child: Row(
-              children: [
-                Expanded(
-                    child: ListView.builder(
-                  itemCount: goldList.length,
-                  itemBuilder: (context, index) {
-                    Gold gold = goldList[index];
-                    return Container(
-                      margin: const EdgeInsets.all(10),
-                      child: GestureDetector(
-                        onTap: () {
-                          Common.gold = gold;
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => XAUPage()),
-                          );
-                        },
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  gold.Date!.split('T')[0],
-                                  style: const TextStyle(color: Colors.white),
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Column(children: [
-                              Text(
-                                gold.Symbol as String,
-                                style: const TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ]),
-                            const Divider(
-                              color: Colors.white,
-                              height: 10,
-                              thickness: 1,
-                              indent: 5,
-                              endIndent: 5,
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ))
-              ],
-            ),
-          );
-        }
-        return Container();
-      },
     );
   }
 }
@@ -171,7 +72,9 @@ class WolvesSignalPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black87,
-      child: wolvesSignal(),
+      child: SingleChildScrollView(
+        child: wolvesSignal(),
+      ),
     );
   }
 
@@ -198,78 +101,71 @@ class WolvesSignalPage extends StatelessWidget {
             signalList.add(signal);
           }
           signalList = signalList.reversed.toList();
-          return Row(
-            children: [
-              Expanded(
-                  child: ListView.builder(
-                      itemCount: signalList.length,
-                      itemBuilder: (context, index) {
-                        Signal signal = signalList[index];
-                        return Container(
-                          margin: const EdgeInsets.only(
-                              left: 20, right: 20, top: 10, bottom: 10),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    signal.Date!.split('T')[0],
-                                    style: const TextStyle(color: Colors.white),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Center(
-                                child: Text(
-                                  signal.Content as String,
-                                  style: const TextStyle(
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.start,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "TP: ${signal.TP}",
-                                    style: const TextStyle(color: Colors.white),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "SL: ${signal.SL}",
-                                    style: const TextStyle(color: Colors.white),
-                                  )
-                                ],
-                              ),
-                              const Divider(
-                                color: Colors.white,
-                                height: 10,
-                                thickness: 1,
-                                indent: 5,
-                                endIndent: 5,
-                              ),
-                            ],
-                          ),
-                        );
-                      }))
-            ],
+          return Column(
+            children: signalList.map((signal) {
+              return Container(
+                margin: const EdgeInsets.only(
+                    left: 20, right: 20, top: 10, bottom: 10),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          signal.Date!.split('T')[0],
+                          style: const TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Center(
+                      child: Text(
+                        signal.Content as String,
+                        style: const TextStyle(
+                            color: Colors.green, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "TP: ${signal.TP}",
+                          style: const TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "SL: ${signal.SL}",
+                          style: const TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                    const Divider(
+                      color: Colors.white,
+                      height: 10,
+                      thickness: 1,
+                      indent: 5,
+                      endIndent: 5,
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
           );
         }
         return Container();
@@ -289,115 +185,99 @@ class SignalVipPage extends StatelessWidget {
     var dateFormat = DateFormat('yyyy-MM-dd');
     String currentDate = dateFormat.format(today);
     if (Common.ACCOUNT.Email as String == 'WolvesVNteam@gmail.com') {
-      currentDate = '2023-07-07';
+      currentDate = '2023-11-17';
     }
 
     DatabaseReference ref = database.ref('BanLenh').child(currentDate);
     return StreamBuilder(
       stream: ref.onValue,
       builder: (context, snapshot) {
-        if (Common.isVip) {
-          if (snapshot.hasData) {
-            signalList.clear();
-            var dataSnapshot = snapshot.data!.snapshot.children;
-            for (var value in dataSnapshot) {
-              var val = value.value as Map<dynamic, dynamic>;
-              Signal signal = Signal(val["Content"], val["Date"], val["Id"],
-                  val["Image"], val["SL"], val["TP"]);
-              signalList.add(signal);
-            }
-            signalList = signalList.reversed.toList();
-            return Row(
-              children: [
-                Expanded(
-                    child: ListView.builder(
-                  itemCount: signalList.length,
-                  itemBuilder: (context, index) {
-                    if (kDebugMode) {
-                      print('length ${signalList.length}');
-                    }
-                    Signal signal = signalList[index];
-                    return Container(
-                      margin: EdgeInsets.only(
-                          left: 20, right: 20, top: 10, bottom: 10),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(
-                                signal.Date!.split('T')[0],
-                                style: const TextStyle(color: Colors.white),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          FittedBox(
-                            fit: BoxFit.fitWidth,
-                            child: Image.network(
-                              signal.Image as String,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                signal.Content as String,
-                                style: const TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                "TP: ${signal.TP}",
-                                style: const TextStyle(color: Colors.white),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                "SL: ${signal.SL}",
-                                style: const TextStyle(color: Colors.white),
-                              )
-                            ],
-                          ),
-                          const Divider(
-                            color: Colors.white,
-                            height: 10,
-                            thickness: 1,
-                            indent: 5,
-                            endIndent: 5,
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ))
-              ],
-            );
-          } else {
-            return Container();
+        if (snapshot.hasData) {
+          signalList.clear();
+          var dataSnapshot = snapshot.data!.snapshot.children;
+          for (var value in dataSnapshot) {
+            var val = value.value as Map<dynamic, dynamic>;
+            Signal signal = Signal(val["Content"], val["Date"], val["Id"],
+                val["Image"], val["SL"], val["TP"]);
+            signalList.add(signal);
           }
+          signalList = signalList.reversed.toList();
+          return Column(
+            children: signalList.map((signal) {
+              return Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          signal.Date!.split('T')[0],
+                          style: const TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Image.network(
+                        signal.Image as String,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          signal.Content as String,
+                          style: const TextStyle(
+                              color: Colors.green, fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "TP: ${signal.TP}",
+                          style: const TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "SL: ${signal.SL}",
+                          style: const TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                    const Divider(
+                      color: Colors.white,
+                      height: 10,
+                      thickness: 1,
+                      indent: 5,
+                      endIndent: 5,
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          );
+        } else {
+          return Container();
         }
-
-        return Container();
       },
     );
   }
@@ -406,7 +286,241 @@ class SignalVipPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black87,
-      child: wolvesSignal(),
+      child: SingleChildScrollView(
+        child: wolvesSignal(),
+      ),
     );
+  }
+}
+
+class StatisticPage extends StatelessWidget {
+  FirebaseDatabase database = FirebaseDatabase.instance;
+
+  StatisticPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+          backgroundColor: Colors.black54,
+          body: SingleChildScrollView(
+            child: Container(
+              color: Colors.black54,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Table(
+                    border: TableBorder.all(
+                        color: Colors.black54,
+                        style: BorderStyle.none,
+                        width: 0),
+                    children: const [
+                      TableRow(children: [
+                        Column(
+                          children: [
+                            Text(
+                              'PIPS',
+                              style: TextStyle(
+                                  fontSize: 18, color: Colors.deepOrange),
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text('TRADES',
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.deepOrange))
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text('WIN RATE',
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.deepOrange))
+                          ],
+                        ),
+                      ])
+                    ],
+                  ),
+                  Table(
+                    border: TableBorder.all(
+                        color: Colors.black54,
+                        style: BorderStyle.none,
+                        width: 0),
+                    children: [
+                      TableRow(children: [
+                        Column(
+                          children: [
+                            Text(
+                              Common.pip,
+                              style: const TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green),
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(Common.trades,
+                                style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green))
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(Common.winRate,
+                                style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green))
+                          ],
+                        ),
+                      ])
+                    ],
+                  ),
+                  const Divider(
+                    color: Colors.white,
+                    height: 10,
+                    thickness: 1,
+                    indent: 5,
+                    endIndent: 5,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  FutureBuilder<Widget>(
+                    future: listPip(),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        // Show a loading indicator while waiting for the future to complete
+                        return const Center(
+                            child: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: CircularProgressIndicator()));
+                      } else if (snapshot.hasError) {
+                        // Show an error message if the future throws an error
+                        return Text('Error: ${snapshot.error}');
+                      } else {
+                        // Show the widget returned by the future
+                        return snapshot.data ??
+                            Container(); // Use a default value if data is null
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+          )),
+    );
+  }
+
+  ApiServices apiServices =
+      ApiServices(Dio(BaseOptions(contentType: 'application/json')));
+
+  Future<Widget> listPip() async {
+    var today = DateTime.now();
+    var dateFormat = DateFormat('yyyy-M-d');
+    String currentDate = dateFormat.format(today);
+    DatabaseReference ref = database.ref('TongPIP').child(currentDate);
+    List<TongPip> tongPips = [];
+
+    var res = apiServices.getTongPips();
+    await res.then((value) {
+      for (TongPip tongPip in value) {
+        tongPips.add(tongPip);
+      }
+    }).onError((error, stackTrace) {
+      print(error);
+    }).catchError((Object obj) {
+      print(obj);
+    });
+
+    return Column(
+        children: tongPips.map((tongPip) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                tongPip.Date.split('T')[0],
+                style: const TextStyle(color: Colors.white),
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Text(
+              tongPip.Money,
+              style: const TextStyle(
+                  color: Colors.orange,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+            ),
+          ]),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    Text(
+                      "TP: ${tongPip.TP}",
+                      style: const TextStyle(color: Colors.red, fontSize: 18),
+                    ),
+                  ]),
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    Text(
+                      "SL: ${tongPip.SL}",
+                      style: const TextStyle(color: Colors.red, fontSize: 18),
+                    ),
+                  ]),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    Text(
+                      "PIP MỚI: ${tongPip.PipMoi}",
+                      style: const TextStyle(color: Colors.green, fontSize: 18),
+                    ),
+                  ]),
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    Text(
+                      "PIP CŨ: ${tongPip.PipCu}",
+                      style: const TextStyle(color: Colors.green, fontSize: 18),
+                    ),
+                  ]),
+                ],
+              )
+            ],
+          ),
+          const Divider(
+            color: Colors.white,
+            height: 10,
+            thickness: 1,
+            indent: 5,
+            endIndent: 5,
+          ),
+        ],
+      );
+    }).toList());
   }
 }

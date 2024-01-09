@@ -23,11 +23,10 @@ class GeneralPage extends StatelessWidget {
       logo = 'assets/images/logo.png';
     }
     return Scaffold(
-        backgroundColor: Colors.black54,
+        backgroundColor: Colors.black,
         body: SafeArea(
             child: Container(
               color: Colors.black87,
-          margin: const EdgeInsets.only(left: 5, right: 5),
           child: Column(
             children: [
               Row(
