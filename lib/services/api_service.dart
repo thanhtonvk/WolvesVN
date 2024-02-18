@@ -9,6 +9,7 @@ import 'package:wolvesvn/models/video.dart';
 import 'package:wolvesvn/models/vip.dart';
 
 import '../models/rating.dart';
+import '../models/fxsymbol.dart';
 import '../models/san.dart';
 import '../models/wolves_news.dart';
 
@@ -25,8 +26,8 @@ abstract class ApiServices {
   @POST('account/register')
   Future register(@Body() Account account);
 
-  @GET('/Symbol/get-symbol')
-  Future<List<String>> getSymbols();
+  @GET('/api/Symbol')
+  Future<List<FxSymbol>> getSymbols();
 
   @POST('account/forgot-password')
   Future forgotAccount(@Query("email") String email);

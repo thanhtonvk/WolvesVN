@@ -84,7 +84,7 @@ class WolvesSignalPage extends StatelessWidget {
     var today = DateTime.now();
     var dateFormat = DateFormat('yyyy-M-d');
     String currentDate = dateFormat.format(today);
-    if (Common.ACCOUNT.Email as String == 'WolvesVNteam@gmail.com') {
+    if (Common.ACCOUNT.Email as String == 'thanhtonvk@gmail.com') {
       currentDate = '2023-7-5';
     }
     DatabaseReference ref = database.ref('TinHieuPost').child(currentDate);
@@ -106,70 +106,59 @@ class WolvesSignalPage extends StatelessWidget {
               return Container(
                 margin: const EdgeInsets.only(
                     left: 20, right: 20, top: 10, bottom: 10),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          signal.Date!.split('T')[0],
-                          style: const TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Center(
-                      child: Text(
-                        signal.Content as String,
-                        style: const TextStyle(
-                            color: Colors.green, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "TP: ${signal.TP}",
-                          style: const TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "SL: ${signal.SL}",
-                          style: const TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                    const Divider(
-                      color: Colors.white,
-                      height: 10,
-                      thickness: 1,
-                      indent: 5,
-                      endIndent: 5,
-                    ),
-                  ],
-                ),
+                child: itemSignal(signal),
               );
             }).toList(),
           );
         }
         return Container();
       },
+    );
+  }
+
+  Widget itemSignal(Signal signal) {
+    return DecoratedBox(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("assets/images/background_signal_wolves.png"),
+            fit: BoxFit.fitWidth),
+      ),
+      child: SizedBox(
+        height: 300,
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "Date: ${signal.Date.toString().split("T")[0]}",
+              style: const TextStyle(
+                  color: Colors.red, fontWeight: FontWeight.bold, fontSize: 22),
+            ),
+            Text(
+              signal.Content.toString(),
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24),
+            ),
+            Text(
+              "TP: ${signal.TP.toString()}",
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24),
+            ),
+            Text(
+              "SL: ${signal.SL.toString()}",
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -184,7 +173,7 @@ class SignalVipPage extends StatelessWidget {
     var today = DateTime.now();
     var dateFormat = DateFormat('yyyy-MM-dd');
     String currentDate = dateFormat.format(today);
-    if (Common.ACCOUNT.Email as String == 'WolvesVNteam@gmail.com') {
+    if (Common.ACCOUNT.Email as String == 'thanhtonvk@gmail.com') {
       currentDate = '2023-11-17';
     }
 
@@ -208,61 +197,7 @@ class SignalVipPage extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          signal.Date!.split('T')[0],
-                          style: const TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: Image.network(
-                        signal.Image as String,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          signal.Content as String,
-                          style: const TextStyle(
-                              color: Colors.green, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "TP: ${signal.TP}",
-                          style: const TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "SL: ${signal.SL}",
-                          style: const TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
+                    itemSignal(signal),
                     const Divider(
                       color: Colors.white,
                       height: 10,
@@ -279,6 +214,52 @@ class SignalVipPage extends StatelessWidget {
           return Container();
         }
       },
+    );
+  }
+
+  Widget itemSignal(Signal signal) {
+    return DecoratedBox(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("assets/images/background_signal.png"),
+            fit: BoxFit.fitWidth),
+      ),
+      child: SizedBox(
+        height: 300,
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "Date: ${signal.Date.toString().split("T")[0]}",
+              style: const TextStyle(
+                  color: Colors.red, fontWeight: FontWeight.bold, fontSize: 22),
+            ),
+            Text(
+              signal.Content.toString(),
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24),
+            ),
+            Text(
+              "TP: ${signal.TP.toString()}",
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24),
+            ),
+            Text(
+              "SL: ${signal.SL.toString()}",
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

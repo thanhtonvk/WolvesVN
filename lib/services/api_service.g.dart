@@ -75,25 +75,27 @@ class _ApiServices implements ApiServices {
   }
 
   @override
-  Future<List<String>> getSymbols() async {
+  Future<List<FxSymbol>> getSymbols() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<String>>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<FxSymbol>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/Symbol/get-symbol',
+              '/api/Symbol',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!.cast<String>();
+    var value = _result.data!
+        .map((dynamic i) => FxSymbol.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 

@@ -45,13 +45,14 @@ dependencies:
   firebase_database: ^10.2.3
   intl: ^0.18.1
   shared_preferences: ^2.2.0
-  dropdown_button2: ^2.1.4
+  dropdown_button2: ^2.3.9
   firebase_messaging: ^14.6.4
   flutter_local_notifications: ^15.1.0+1
   app_settings: ^5.0.0
   desktop_webview_window: ^0.2.0
   carousel_slider: ^4.2.1
   flutter_widget_from_html: ^0.14.8
+  easy_search_bar: ^2.5.0
 
 dev_dependencies:
   json_serializable: ^6.7.1
@@ -83,6 +84,8 @@ flutter:
     - assets/images/back.png
     - assets/images/logo-vip.png
     - assets/images/logo.png
+    - assets/images/background_signal.png
+    - assets/images/background_signal_wolves.png
 
     # An image asset can refer to one or more resolution-specific "variants", see
     # https://flutter.dev/assets-and-images/#resolution-aware

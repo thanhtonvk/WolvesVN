@@ -1,12 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dio/dio.dart';
+import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 // Import for Android features.
 import 'package:webview_flutter_android/webview_flutter_android.dart';
+import 'package:wolvesvn/models/fxsymbol.dart';
 import 'package:wolvesvn/models/quangcao.dart';
 import 'package:wolvesvn/ui/trading_page.dart';
 import '../../generated/common.dart';
@@ -25,7 +29,44 @@ class MarketState extends State<MarketUI> {
 
   FirebaseDatabase database = FirebaseDatabase.instance;
   String logo = '';
-  List stocks = [];
+  List<FxSymbol> stocks = [];
+  var f = NumberFormat("###.0#", "en_US");
+  List<String> listStockStorage = [];
+  late SharedPreferences prefs;
+
+  void loadListStorage() async {
+    prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey("stocks")) {
+      listStockStorage = prefs.getStringList("stocks")!;
+      print('list stock');
+      print(listStockStorage);
+    } else {
+      listStockStorage = [
+        "EURUSD",
+        "XAUUSD",
+        "GBPUSD",
+        "USDCAD",
+        "USDCHF",
+        "NZDUSD",
+        "AUDUSD",
+        "GBPJPY",
+        "BTCUSD",
+        "ETHUSD"
+      ];
+      prefs.setStringList("stocks", listStockStorage);
+    }
+  }
+
+  FxSymbol getSymbol(String symbol) {
+    late FxSymbol result;
+    for (FxSymbol fxSymbol in stocks) {
+      if (fxSymbol.T == symbol) {
+        result = fxSymbol;
+        break;
+      }
+    }
+    return result;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +75,7 @@ class MarketState extends State<MarketUI> {
     } else {
       logo = 'assets/images/logo.png';
     }
+    loadListStorage();
     return Scaffold(
         backgroundColor: Colors.black,
         body: SafeArea(
@@ -71,6 +113,37 @@ class MarketState extends State<MarketUI> {
                   },
                 ),
               ),
+              Container(
+                margin: const EdgeInsets.only(left: 15, right: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero,
+                                    side: BorderSide(color: Colors.blue)))),
+                        onPressed: () {
+                          addDialog(context);
+                        },
+                        icon: const Icon(
+                          Icons.add,
+                          color: Colors.blue,
+                        ),
+                        label: const Text(
+                          "Thêm cặp",
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Expanded(
                 child: FutureBuilder<Widget>(
                   future: gridMoney(),
@@ -106,21 +179,28 @@ class MarketState extends State<MarketUI> {
   }
 
   Future<Widget> gridMoney() async {
+    List<FxSymbol> stocksList = [];
     var res = apiServices.getSymbols();
     await res.then((value) {
-      for (String symbol in value) {
+      stocks.clear();
+      for (FxSymbol symbol in value) {
+        symbol.T = symbol.T?.split(":")[1];
         stocks.add(symbol);
+        if (listStockStorage.contains(symbol.T.toString())) {
+          stocksList.add(symbol);
+        }
       }
+
+      print('length ${stocksList.length}');
     }).onError((error, stackTrace) {
       print(error);
     }).catchError((Object obj) {
       print(obj);
     });
-    stocks = stocks.reversed.toList();
     return Container(
-        padding: EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(12.0),
         child: GridView.builder(
-          itemCount: stocks.length,
+          itemCount: stocksList.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 4.0,
@@ -129,57 +209,59 @@ class MarketState extends State<MarketUI> {
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
                 onTap: () {
-                  Common.money = "FOREXCOM:" + stocks[index];
+                  Common.money = "FX_IDC:" + stocksList[index].T.toString();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const TradingPage()),
                   );
                 },
-                child: Stack(
-                  children: [
-                    webview(stocks[index]),
-                    const Card(
-                      color: Colors.transparent,
-                      child: SizedBox(
-                        width: 300,
-                        height: 300,
-                      ),
-                    )
-                  ],
-                ));
+                child: symbolItem(stocksList[index]));
           },
         ));
   }
 
-  Widget webview(String stock) {
-    String html = '''<!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
- <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
-  {
-  "symbol": "ENTITY",
-  "width": "100%",
-  "colorTheme": "dark",
-  "isTransparent": true,
-  "locale": "vi_VN"
-}
-  </script>
-</div>
-<!-- TradingView Widget END -->'''
-        .replaceAll('ENTITY', 'FOREXCOM:' + stock);
-    WebViewController controller = WebViewController();
-    controller.setJavaScriptMode(JavaScriptMode.unrestricted);
-    controller.enableZoom(false);
-    if (controller.platform is AndroidWebViewController) {
-      AndroidWebViewController.enableDebugging(true);
-      (controller.platform as AndroidWebViewController)
-          .setMediaPlaybackRequiresUserGesture(false);
+  Widget symbolItem(FxSymbol fxSymbol) {
+    String name = fxSymbol.T.toString();
+    double open = double.parse(fxSymbol.o.toString());
+    double close = double.parse(fxSymbol.c.toString());
+    double raise = open - close;
+    double percent = (raise.abs() / open) * 100;
+    Color color = Colors.green;
+    String result = "";
+    if (raise < 0) {
+      color = Colors.red;
+      result =
+          "➘ ${percent.toStringAsFixed(2)}% (${raise.abs().toStringAsFixed(5)})";
+    } else if (raise > 0) {
+      result =
+          "➚ ${percent.toStringAsFixed(2)}% (${raise.abs().toStringAsFixed(5)})";
+    } else {
+      color = Colors.yellow;
+      result =
+          "⬌ ${percent.toStringAsFixed(2)}% (${raise.abs().toStringAsFixed(5)})";
     }
-    controller.setBackgroundColor(Colors.black);
-    controller.loadHtmlString(html);
-    return WebViewWidget(
-      controller: controller,
+    return Card(
+      color: Colors.transparent,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            name,
+            style: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+          ),
+          Text(
+            open.toStringAsFixed(5),
+            style: const TextStyle(color: Colors.white, fontSize: 14),
+          ),
+          Text(
+            result,
+            style: TextStyle(color: color, fontSize: 12),
+          )
+        ],
+      ),
     );
   }
 
@@ -267,6 +349,362 @@ class MarketState extends State<MarketUI> {
         )
       ],
     );
+  }
+
+  String searchValue = '';
+
+  void addToStorage(String symbol) {
+    if (!Common.isVip && listStockStorage.length >= 10) {
+      Common.showAlertDialog(
+          context, "Thông báo", "Bạn chỉ được thêm tối đa 10 cặp");
+    } else {
+      if (!listStockStorage.contains(symbol)) {
+        listStockStorage.add(symbol);
+        prefs.setStringList("stocks", listStockStorage);
+        Navigator.of(context).pop();
+        addDialog(context);
+      } else {
+        listStockStorage.remove(symbol);
+        prefs.setStringList("stocks", listStockStorage);
+        Navigator.of(context).pop();
+        addDialog(context);
+      }
+    }
+  }
+
+  void addDialog(BuildContext context) {
+    List<String> suggestions = [];
+    for (FxSymbol symbol in stocks) {
+      suggestions.add(symbol.T.toString());
+    }
+    Navigator.of(context).push(MaterialPageRoute<String>(
+        builder: (BuildContext context) {
+          return Scaffold(
+            appBar: EasySearchBar(
+                searchBackgroundColor: Colors.deepOrangeAccent,
+                backgroundColor: Colors.deepOrangeAccent,
+                title: const Center(
+                  child: Text(
+                    'Cặp giá trị',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                onSearch: (value) => setState(() => searchValue = value),
+                onSuggestionTap: (data) {
+                  addToStorage(data);
+                },
+                suggestions: suggestions),
+            body: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              padding: const EdgeInsets.all(10),
+              color: Colors.black,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Phổ biến",
+                    style: TextStyle(
+                        color: Colors.green, fontWeight: FontWeight.bold),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                          child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white10),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    side: BorderSide(color: Colors.white10)))),
+                        onPressed: () {
+                          addToStorage("USDCAD");
+                        },
+                        child: const Text(
+                          "USD/CAD",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      )),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                          child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white10),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    side: BorderSide(color: Colors.white10)))),
+                        onPressed: () {
+                          addToStorage("EURUSD");
+                        },
+                        child: const Text(
+                          "EUR/USD",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      )),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                          child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white10),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    side: BorderSide(color: Colors.white10)))),
+                        onPressed: () {
+                          addToStorage("AUDUSD");
+                        },
+                        child: const Text(
+                          "AUD/USD",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ))
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                          child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white10),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    side: BorderSide(color: Colors.white10)))),
+                        onPressed: () {
+                          addToStorage("XAUUSD");
+                        },
+                        child: const Text(
+                          "XAU/USD",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      )),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                          child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white10),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    side: BorderSide(color: Colors.white10)))),
+                        onPressed: () {
+                          addToStorage("USDRUB");
+                        },
+                        child: const Text(
+                          "USD/RUB",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      )),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                          child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white10),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    side: BorderSide(color: Colors.white10)))),
+                        onPressed: () {
+                          addToStorage("USDCHF");
+                        },
+                        child: const Text(
+                          "USD/CHF",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ))
+                    ],
+                  ),
+                  Text(
+                    "${stocks.length} cặp",
+                    style: const TextStyle(
+                        color: Colors.green, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Expanded(
+                    child: SizedBox(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: stocks.map((stock) {
+                            if (!listStockStorage
+                                .contains(stock.T.toString())) {
+                              return GestureDetector(
+                                  onTap: () {
+                                    addToStorage(stock.T.toString());
+                                    setState(() {
+                                      listStockStorage =
+                                          prefs.getStringList("stocks")!;
+                                    });
+                                  },
+                                  child: Container(
+                                      margin: const EdgeInsets.all(5),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const Divider(
+                                            color: Colors.white24,
+                                            height: 0,
+                                            thickness: 1,
+                                            indent: 0,
+                                            endIndent: 0,
+                                          ),
+                                          const SizedBox(height: 7),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text(
+                                                    stock.T.toString(),
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.white,
+                                                        fontSize: 18),
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                  child: Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Text(
+                                                  double.parse(
+                                                          stock.c.toString())
+                                                      .toStringAsFixed(5),
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 18),
+                                                ),
+                                              )),
+                                              const Expanded(
+                                                  child: Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: Icon(
+                                                  Icons.add,
+                                                  color: Colors.green,
+                                                ),
+                                              ))
+                                            ],
+                                          ),
+                                        ],
+                                      )));
+                            } else {
+                              return GestureDetector(
+                                  onTap: () {
+                                    addToStorage(stock.T.toString());
+                                    setState(() {
+                                      listStockStorage =
+                                          prefs.getStringList("stocks")!;
+                                    });
+                                  },
+                                  child: Container(
+                                      margin: const EdgeInsets.all(5),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const Divider(
+                                            color: Colors.white24,
+                                            height: 0,
+                                            thickness: 1,
+                                            indent: 0,
+                                            endIndent: 0,
+                                          ),
+                                          const SizedBox(height: 7),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text(
+                                                    stock.T.toString(),
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.white,
+                                                        fontSize: 18),
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                  child: Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Text(
+                                                  double.parse(
+                                                          stock.c.toString())
+                                                      .toStringAsFixed(5),
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 18),
+                                                ),
+                                              )),
+                                              const Expanded(
+                                                  child: Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: Icon(
+                                                  Icons.remove,
+                                                  color: Colors.red,
+                                                ),
+                                              ))
+                                            ],
+                                          ),
+                                        ],
+                                      )));
+                            }
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+        fullscreenDialog: true));
   }
 }
 

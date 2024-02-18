@@ -3,11 +3,12 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:wolvesvn/models/sangiaodich.dart';
 import 'package:wolvesvn/models/tintuc.dart';
 import 'package:wolvesvn/services/api_service.dart';
 import 'package:wolvesvn/ui/ea_page.dart';
-
+import 'package:webview_flutter_android/webview_flutter_android.dart';
 import '../../generated/common.dart';
 import '../../models/wolves_news.dart';
 import '../tin_tuc_wolves.dart';
@@ -31,13 +32,13 @@ class NewsPage extends StatelessWidget {
                 bottom: const TabBar(
                   tabs: [
                     Tab(
-                      text: 'HOT',
+                      text: "Lịch KT",
                     ),
                     Tab(
                       text: 'Tin tức',
                     ),
                     Tab(
-                      text: 'Wolves',
+                      text: 'WolvesVN',
                     ),
                     Tab(
                       text: 'EA',
@@ -62,7 +63,7 @@ class NewsPage extends StatelessWidget {
                 )),
             body: TabBarView(
               children: [
-                VipNews(),
+                CalendarEconomy(),
                 NormalNews(),
                 WolvesNewsPage(),
                 SanGiaoDichPage()
@@ -71,6 +72,56 @@ class NewsPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class CalendarEconomy extends StatelessWidget {
+  CalendarEconomy({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return calendarWidget();
+  }
+
+  String html = '''
+   <html>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      </head>
+    
+     <body>
+   
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+ <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+  {
+  "width": "100%",
+  "height": "100%",
+  "colorTheme": "dark",
+  "isTransparent": true,
+  "locale": "vi_VN",
+  "importanceFilter": "-1,0,1"
+}
+  </script>
+</div>
+     </body>
+
+ </html>''';
+
+  Widget calendarWidget() {
+    WebViewController controller = WebViewController();
+    controller.setJavaScriptMode(JavaScriptMode.unrestricted);
+    controller.enableZoom(false);
+    if (controller.platform is AndroidWebViewController) {
+      AndroidWebViewController.enableDebugging(true);
+      (controller.platform as AndroidWebViewController)
+          .setMediaPlaybackRequiresUserGesture(false);
+    }
+    controller.setBackgroundColor(Colors.black);
+    controller.loadHtmlString(html);
+    return WebViewWidget(
+      controller: controller,
     );
   }
 }

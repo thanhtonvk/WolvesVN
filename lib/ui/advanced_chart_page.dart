@@ -15,31 +15,39 @@ class AdvancedChartPage extends StatefulWidget {
 
 class AdvancedChartState extends State<AdvancedChartPage> {
   late final WebViewController controller;
-  String html = '''<!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container" style="height:100%;width:100%">
-  <div id="tradingview_dcc75" style="height:calc(100% - 32px);width:100%"></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-  <script type="text/javascript">
-  new TradingView.widget(
+
+  String html = '''
+   <html>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      </head>
+    
+     <body>
+   
+   <div class="tradingview-widget-container" style="height:100%;width:100%">
+  <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+  <div class="tradingview-widget-copyright"><a href="https://wolvesvn.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Theo dõi mọi thị trường trên WolvesVN</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
   {
   "autosize": true,
-  "symbol": "ahihi",
+  "symbol": "FXSYMBOL",
   "interval": "D",
   "timezone": "Asia/Ho_Chi_Minh",
   "theme": "dark",
   "style": "1",
   "locale": "vi_VN",
+  "backgroundColor": "rgba(0, 0, 0, 1)",
+  "gridColor": "rgba(255, 255, 255, 0.06)",
   "enable_publishing": false,
-  "withdateranges": true,
-  "hide_side_toolbar": false,
   "allow_symbol_change": true,
-    "backgroundColor": "rgba(0, 0, 0, 1)",
-  "container_id": "tradingview_dcc75"
+  "calendar": false,
+  "support_host": "https://www.tradingview.com"
 }
-  );
   </script>
 </div>
-<!-- TradingView Widget END -->''';
+     </body>
+
+ </html>''';
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +63,7 @@ class AdvancedChartState extends State<AdvancedChartPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    html = html.replaceAll('ahihi', Common.money);
+    html = html.replaceAll('FXSYMBOL', Common.money);
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
@@ -100,10 +108,23 @@ class AdvancedChartState extends State<AdvancedChartPage> {
         },
         color: Colors.white,
       ),
+      actions: [
+        IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.candlestick_chart_outlined,
+              color: Colors.white,
+              size: 34,
+            ))
+      ],
       backgroundColor: Colors.black,
-      title: Text(
-        Common.money,
-        style: TextStyle(color: Colors.white),
+      title: Center(
+        child: Text(
+          Common.money,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
