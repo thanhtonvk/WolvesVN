@@ -84,9 +84,6 @@ class WolvesSignalPage extends StatelessWidget {
     var today = DateTime.now();
     var dateFormat = DateFormat('yyyy-M-d');
     String currentDate = dateFormat.format(today);
-    if (Common.ACCOUNT.Email as String == 'thanhtonvk@gmail.com') {
-      currentDate = '2023-7-5';
-    }
     DatabaseReference ref = database.ref('TinHieuPost').child(currentDate);
     return StreamBuilder(
       stream: ref.onValue,
@@ -96,8 +93,8 @@ class WolvesSignalPage extends StatelessWidget {
           var dataSnapshot = snapshot.data!.snapshot.children;
           for (var value in dataSnapshot) {
             var val = value.value as Map<dynamic, dynamic>;
-            Signal signal = Signal(val["Content"], val["Date"], val["Id"], "",
-                val["SL"], val["TP"]);
+            Signal signal = Signal(val["Content"], val["Date"], val["Id"], val["Image"],
+                val["SL"], val["TP"],);
             signalList.add(signal);
           }
           signalList = signalList.reversed.toList();
@@ -128,6 +125,7 @@ class WolvesSignalPage extends StatelessWidget {
   }
 
   Widget itemSignal(Signal signal) {
+
     return Column(
       children: [
         Row(
@@ -190,9 +188,6 @@ class SignalVipPage extends StatelessWidget {
     var today = DateTime.now();
     var dateFormat = DateFormat('yyyy-MM-dd');
     String currentDate = dateFormat.format(today);
-    if (Common.ACCOUNT.Email as String == 'thanhtonvk@gmail.com') {
-      currentDate = '2023-11-17';
-    }
 
     DatabaseReference ref = database.ref('BanLenh').child(currentDate);
     return StreamBuilder(
