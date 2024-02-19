@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:wolvesvn/ui/general_ui/doi_mat_khau.dart';
 import 'package:wolvesvn/ui/general_ui/doi_tac.dart';
 import 'package:wolvesvn/ui/general_ui/lien_he.dart';
@@ -26,7 +27,7 @@ class GeneralPage extends StatelessWidget {
         backgroundColor: Colors.black,
         body: SafeArea(
             child: Container(
-              color: Colors.black87,
+          color: Colors.black87,
           child: Column(
             children: [
               Row(
@@ -73,139 +74,254 @@ class GeneralPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              width: double.infinity,
-              height: 45,
-              child: ElevatedButton(
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => UpdateInformationPage()),
-                    );
-                  },
-                  child: const Text(
-                    'Cập nhật thông tin',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: 96,
+                    child: ElevatedButton.icon(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white10),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      side:
+                                          BorderSide(color: Colors.white12)))),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const UpdateInformationPage()),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.person_outline,
+                        color: Colors.white,
+                        size: 48,
+                      ),
+                      label: const Text(
+                        "Cá nhân",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: SizedBox(
+                    height: 96,
+                    child: ElevatedButton.icon(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white10),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      side:
+                                          BorderSide(color: Colors.white12)))),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MyDoiTac()));
+                      },
+                      icon: const Icon(
+                        Icons.handshake_outlined,
+                        color: Colors.white,
+                        size: 48,
+                      ),
+                      label: const Text(
+                        "Đối tác",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: 96,
+                    child: ElevatedButton.icon(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white10),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      side:
+                                          BorderSide(color: Colors.white12)))),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MyLienHePage()),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.call_outlined,
+                        color: Colors.white,
+                        size: 48,
+                      ),
+                      label: const Text(
+                        "Liên hệ",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: SizedBox(
+                    height: 96,
+                    child: ElevatedButton.icon(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white10),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      side:
+                                          BorderSide(color: Colors.white12)))),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DoiMatKhauPage()),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.lock_open,
+                        color: Colors.white,
+                        size: 48,
+                      ),
+                      label: const Text(
+                        "Mật khẩu",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: 96,
+                    child: ElevatedButton.icon(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white10),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      side:
+                                          BorderSide(color: Colors.white12)))),
+                      onPressed: () {
+                        block(context);
+                      },
+                      icon: const Icon(
+                        Icons.no_accounts_outlined,
+                        color: Colors.white,
+                        size: 48,
+                      ),
+                      label: const Text(
+                        "Xóa tài khoản",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: SizedBox(
+                    height: 96,
+                    child: ElevatedButton.icon(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white10),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      side:
+                                          BorderSide(color: Colors.white12)))),
+                      onPressed: () {
+                        openBrowser('http://app.wolvesvn.com/');
+                      },
+                      icon: const Icon(
+                        Icons.webhook,
+                        color: Colors.white,
+                        size: 48,
+                      ),
+                      label: const Text(
+                        "Trang web",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(
               height: 10,
             ),
             SizedBox(
               width: double.infinity,
-              height: 45,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MyDoiTac()));
-                  },
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child: const Text(
-                    'Đối tác',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  )),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 45,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MyLienHePage()),
-                    );
-                  },
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child: const Text(
-                    'Liên hệ',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  )),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 45,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => DoiMatKhauPage()),
-                    );
-                  },
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child: const Text(
-                    'Đổi mật khẩu',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  )),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 45,
-              child: ElevatedButton(
-                  onPressed: () {
-                    block(context);
-                  },
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child: const Text(
-                    'Xoá tài khoản',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  )),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 45,
-              child: ElevatedButton(
-                  onPressed: () {
-                    openBrowser('http://wolves-vn.ddns.net/');
-                  },
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child: const Text(
-                    'Trang web',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  )),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 45,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => Login(),
-                    ));
-                  },
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child: const Text(
-                    'Đăng xuất',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  )),
-            ),
-            const SizedBox(
-              height: 10,
+              height: 48,
+              child: ElevatedButton.icon(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.white10),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            side: BorderSide(color: Colors.white12)))),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => Login(),
+                  ));
+                },
+                icon: const Icon(
+                  Icons.logout,
+                  color: Colors.white,
+                  size: 24,
+                ),
+                label: const Text(
+                  "Đăng xuất",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
           ],
         ),
@@ -234,10 +350,9 @@ class GeneralPage extends StatelessWidget {
   }
 
   Future<void> openBrowser(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url, forceSafariVC: false);
-    } else {
-      throw 'Could not launch $url';
+    Uri _url = Uri.parse(url);
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
     }
   }
 

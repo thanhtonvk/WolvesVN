@@ -39,9 +39,9 @@ class AdvancedChartState extends State<AdvancedChartPage> {
   "backgroundColor": "rgba(0, 0, 0, 1)",
   "gridColor": "rgba(255, 255, 255, 0.06)",
   "enable_publishing": false,
-  "allow_symbol_change": true,
-  "calendar": false,
-  "support_host": "https://www.tradingview.com"
+  "allow_symbol_change": false,
+  "calendar": true,
+  "support_host": "https://wolvesvn.com/"
 }
   </script>
 </div>
@@ -70,7 +70,7 @@ class AdvancedChartState extends State<AdvancedChartPage> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
-            debugPrint('progress');
+            debugPrint('ok');
           },
           onPageStarted: (String url) {
             debugPrint('started');

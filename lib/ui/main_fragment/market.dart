@@ -225,7 +225,7 @@ class MarketState extends State<MarketUI> {
     String name = fxSymbol.T.toString();
     double open = double.parse(fxSymbol.o.toString());
     double close = double.parse(fxSymbol.c.toString());
-    double raise = open - close;
+    double raise = close - open;
     double percent = (raise.abs() / open) * 100;
     Color color = Colors.green;
     String result = "";
@@ -253,7 +253,7 @@ class MarketState extends State<MarketUI> {
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
           ),
           Text(
-            open.toStringAsFixed(5),
+            close.toStringAsFixed(5),
             style: const TextStyle(color: Colors.white, fontSize: 14),
           ),
           Text(
@@ -292,10 +292,9 @@ class MarketState extends State<MarketUI> {
   }
 
   Future<void> openBrowser(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url, forceSafariVC: false);
-    } else {
-      throw 'Could not launch $url';
+    Uri _url = Uri.parse(url);
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
     }
   }
 

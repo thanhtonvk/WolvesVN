@@ -106,7 +106,18 @@ class WolvesSignalPage extends StatelessWidget {
               return Container(
                 margin: const EdgeInsets.only(
                     left: 20, right: 20, top: 10, bottom: 10),
-                child: itemSignal(signal),
+                child: Column(
+                  children: [
+                    itemSignal(signal),
+                    const Divider(
+                      color: Colors.white,
+                      height: 10,
+                      thickness: 1,
+                      indent: 5,
+                      endIndent: 5,
+                    ),
+                  ],
+                ),
               );
             }).toList(),
           );
@@ -124,7 +135,7 @@ class WolvesSignalPage extends StatelessWidget {
             fit: BoxFit.fitWidth),
       ),
       child: SizedBox(
-        height: 300,
+        height: 200,
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -133,28 +144,29 @@ class WolvesSignalPage extends StatelessWidget {
             Text(
               "Date: ${signal.Date.toString().split("T")[0]}",
               style: const TextStyle(
-                  color: Colors.red, fontWeight: FontWeight.bold, fontSize: 22),
+                  color: Colors.red, fontWeight: FontWeight.bold, fontSize: 14),
             ),
             Text(
+              textAlign: TextAlign.center,
               signal.Content.toString(),
               style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
-                  fontSize: 24),
+                  fontSize: 16),
             ),
             Text(
               "TP: ${signal.TP.toString()}",
               style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
-                  fontSize: 24),
+                  fontSize: 16),
             ),
             Text(
               "SL: ${signal.SL.toString()}",
               style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
-                  fontSize: 24),
+                  fontSize: 16),
             ),
           ],
         ),
@@ -225,7 +237,7 @@ class SignalVipPage extends StatelessWidget {
             fit: BoxFit.fitWidth),
       ),
       child: SizedBox(
-        height: 300,
+        height: 200,
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -234,28 +246,28 @@ class SignalVipPage extends StatelessWidget {
             Text(
               "Date: ${signal.Date.toString().split("T")[0]}",
               style: const TextStyle(
-                  color: Colors.red, fontWeight: FontWeight.bold, fontSize: 22),
+                  color: Colors.red, fontWeight: FontWeight.bold, fontSize: 14),
             ),
             Text(
               signal.Content.toString(),
               style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
-                  fontSize: 24),
+                  fontSize: 16),
             ),
             Text(
               "TP: ${signal.TP.toString()}",
               style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
-                  fontSize: 24),
+                  fontSize: 16),
             ),
             Text(
               "SL: ${signal.SL.toString()}",
               style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
-                  fontSize: 24),
+                  fontSize: 16),
             ),
           ],
         ),

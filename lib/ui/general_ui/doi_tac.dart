@@ -56,10 +56,9 @@ class DoiTacState extends State<MyDoiTac> {
   }
 
   Future<void> openBrowser(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url, forceSafariVC: false);
-    } else {
-      throw 'Could not launch $url';
+    Uri _url = Uri.parse(url);
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
     }
   }
 
@@ -88,12 +87,24 @@ class DoiTacState extends State<MyDoiTac> {
             itemCount: doiTacList.length,
             itemBuilder: (context, index) {
               DoiTac doiTac = doiTacList[index];
+              String logoLink =
+                  "https://logo.clearbit.com/${doiTac.TrangWeb.split('/')[2]}";
+              print(logoLink);
               return Column(
                 children: [
                   ListTile(
                     onTap: () {
-                      openBrowser(doiTac.TrangWeb);
+                      openBrowser(doiTac.TrangWeb.trim());
                     },
+                    leading: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        minWidth: 64,
+                        minHeight: 64,
+                        maxWidth: 64,
+                        maxHeight: 64,
+                      ),
+                      child: Image.network(logoLink, fit: BoxFit.cover),
+                    ),
                     title: Text(
                       doiTac.TenDoiTac,
                       style: const TextStyle(

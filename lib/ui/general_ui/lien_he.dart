@@ -46,10 +46,9 @@ class LienHeState extends State<MyLienHePage> {
   }
 
   Future<void> openBrowser(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url, forceSafariVC: false);
-    } else {
-      throw 'Could not launch $url';
+    Uri _url = Uri.parse(url);
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
     }
   }
 
