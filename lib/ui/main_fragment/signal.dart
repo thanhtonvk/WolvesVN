@@ -128,49 +128,54 @@ class WolvesSignalPage extends StatelessWidget {
   }
 
   Widget itemSignal(Signal signal) {
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage("assets/images/background_signal_wolves.png"),
-            fit: BoxFit.fitWidth),
-      ),
-      child: SizedBox(
-        height: 200,
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Text(
-              "Date: ${signal.Date.toString().split("T")[0]}",
-              style: const TextStyle(
-                  color: Colors.red, fontWeight: FontWeight.bold, fontSize: 14),
-            ),
-            Text(
-              textAlign: TextAlign.center,
-              signal.Content.toString(),
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
-            ),
-            Text(
-              "TP: ${signal.TP.toString()}",
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
-            ),
-            Text(
-              "SL: ${signal.SL.toString()}",
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
-            ),
+              signal.Date!.split('T')[0],
+              style: const TextStyle(color: Colors.white),
+            )
           ],
         ),
-      ),
+        const SizedBox(
+          height: 5,
+        ),
+        Center(
+          child: Text(
+            signal.Content as String,
+            style: const TextStyle(
+                color: Colors.green, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.start,
+          ),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Image.network(signal.Image.toString(), fit: BoxFit.fitWidth),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              "TP: ${signal.TP}",
+              style: const TextStyle(color: Colors.white),
+            )
+          ],
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              "SL: ${signal.SL}",
+              style: const TextStyle(color: Colors.white),
+            )
+          ],
+        ),
+      ],
     );
   }
 }
@@ -198,7 +203,10 @@ class SignalVipPage extends StatelessWidget {
           var dataSnapshot = snapshot.data!.snapshot.children;
           for (var value in dataSnapshot) {
             var val = value.value as Map<dynamic, dynamic>;
-            Signal signal = Signal(val["Content"], val["Date"], val["Id"],
+
+            List date = val["Date"].split("T")[0].split('-');
+            String finalDate = '${date[2]} - ${date[1]} - ${date[0]}';
+            Signal signal = Signal(val["Content"], finalDate, val["Id"],
                 val["Image"], val["SL"], val["TP"]);
             signalList.add(signal);
           }
@@ -230,11 +238,16 @@ class SignalVipPage extends StatelessWidget {
   }
 
   Widget itemSignal(Signal signal) {
+    String background = '';
+    if (signal.Content.toString().contains("SELL")) {
+      background = "assets/images/background_signal.png";
+    } else {
+      background = "assets/images/background_signal_wolves.png";
+    }
     return DecoratedBox(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage("assets/images/background_signal.png"),
-            fit: BoxFit.fitWidth),
+            image: AssetImage(background), fit: BoxFit.fitWidth),
       ),
       child: SizedBox(
         height: 200,
@@ -244,7 +257,7 @@ class SignalVipPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Date: ${signal.Date.toString().split("T")[0]}",
+              "Date: ${signal.Date.toString()}",
               style: const TextStyle(
                   color: Colors.red, fontWeight: FontWeight.bold, fontSize: 14),
             ),
@@ -255,19 +268,39 @@ class SignalVipPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 16),
             ),
-            Text(
-              "TP: ${signal.TP.toString()}",
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
+            Row(
+              children: [
+                Expanded(child: Container()),
+                Expanded(
+                    child: Container(
+                  margin: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    "TP : ${signal.TP.toString()}",
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  ),
+                )),
+                Expanded(child: Container()),
+              ],
             ),
-            Text(
-              "SL: ${signal.SL.toString()}",
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
+            Row(
+              children: [
+                Expanded(child: Container()),
+                Expanded(
+                    child: Container(
+                  margin: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    "SL : ${signal.SL.toString()}",
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  ),
+                )),
+                Expanded(child: Container()),
+              ],
             ),
           ],
         ),
@@ -452,7 +485,7 @@ class StatisticPage extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: 10,
+            height: 5,
           ),
           Column(mainAxisAlignment: MainAxisAlignment.start, children: [
             Text(
@@ -471,36 +504,29 @@ class StatisticPage extends StatelessWidget {
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Text(
-                      "TP: ${tongPip.TP}",
-                      style: const TextStyle(color: Colors.red, fontSize: 18),
-                    ),
-                  ]),
-                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Text(
-                      "SL: ${tongPip.SL}",
-                      style: const TextStyle(color: Colors.red, fontSize: 18),
-                    ),
-                  ]),
+                  Text(
+                    "TP : ${tongPip.TP}",
+                    style: const TextStyle(color: Colors.green, fontSize: 18),
+                  ),
+                  Text(
+                    "SL : ${tongPip.SL}",
+                    style: const TextStyle(color: Colors.red, fontSize: 18),
+                  )
                 ],
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Text(
-                      "PIP MỚI: ${tongPip.PipMoi}",
-                      style: const TextStyle(color: Colors.green, fontSize: 18),
-                    ),
-                  ]),
-                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Text(
-                      "PIP CŨ: ${tongPip.PipCu}",
-                      style: const TextStyle(color: Colors.green, fontSize: 18),
-                    ),
-                  ]),
+                  Text(
+                    "PIP TP : ${tongPip.PipMoi}",
+                    style: const TextStyle(color: Colors.green, fontSize: 18),
+                  ),
+                  Text(
+                    "PIP SL : ${tongPip.PipCu}",
+                    style: const TextStyle(color: Colors.red, fontSize: 18),
+                  )
                 ],
               )
             ],
