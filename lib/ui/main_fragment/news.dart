@@ -145,9 +145,6 @@ class VipNews extends StatelessWidget {
     var today = DateTime.now();
     var dateFormat = DateFormat('yyyy-MM-dd');
     String currentDate = dateFormat.format(today);
-    if (Common.ACCOUNT.Email as String == 'WolvesVNteam@gmail.com') {
-      currentDate = '2023-07-07';
-    }
 
     DatabaseReference ref = database.ref('NewsVip').child(currentDate);
     List<TinTuc> newsList = [];
@@ -228,9 +225,6 @@ class NormalNews extends StatelessWidget {
     var today = DateTime.now();
     var dateFormat = DateFormat('yyyy-MM-dd');
     String currentDate = dateFormat.format(today);
-    if (Common.ACCOUNT.Email as String == 'WolvesVNteam@gmail.com') {
-      currentDate = '2023-07-07';
-    }
 
     DatabaseReference ref = database.ref('News').child(currentDate);
     List<TinTuc> newsList = [];
@@ -308,7 +302,7 @@ class NormalNews extends StatelessWidget {
 
 class WolvesNewsPage extends StatelessWidget {
   ApiServices apiServices =
-      ApiServices(Dio(BaseOptions(contentType: 'application/json')));
+  ApiServices(Dio(BaseOptions(contentType: 'application/json')));
 
   WolvesNewsPage({super.key});
 
@@ -318,41 +312,75 @@ class WolvesNewsPage extends StatelessWidget {
         color: Colors.black87,
         child: SingleChildScrollView(
             child: Padding(
-          padding: EdgeInsets.all(10),
-          child: FutureBuilder<Widget>(
-            future: listWolvesNews(context),
-            builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                // Show a loading indicator while waiting for the future to complete
-                return const Center(
-                    child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: CircularProgressIndicator()));
-              } else if (snapshot.hasError) {
-                // Show an error message if the future throws an error
-                return Text('Error: ${snapshot.error}');
-              } else {
-                // Show the widget returned by the future
-                return snapshot.data ??
-                    Container(); // Use a default value if data is null
-              }
-            },
+              padding: EdgeInsets.all(10),
+              child: FutureBuilder<Widget>(
+                future: listWolvesNews(context),
+                builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    // Show a loading indicator while waiting for the future to complete
+                    return const Center(
+                        child: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: CircularProgressIndicator()));
+                  } else if (snapshot.hasError) {
+                    // Show an error message if the future throws an error
+                    return Text('Error: ${snapshot.error}');
+                  } else {
+                    // Show the widget returned by the future
+                    return snapshot.data ??
+                        Container(); // Use a default value if data is null
+                  }
+                },
+              ),
+            )));
+  }
+
+  Widget itemNewsWolves(WolvesNews wolvesNews, BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Common.wolvesNews = wolvesNews;
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const TinTucWolvesPage(),
+        ));
+      },
+      child: Column(
+        children: [
+          Text(
+            wolvesNews.Titile,
+            style: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+            textAlign: TextAlign.left,
           ),
-        )));
+          Image.network(
+            wolvesNews.Image,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const Divider(
+            color: Colors.white,
+            height: 10,
+            thickness: 1,
+            indent: 5,
+            endIndent: 5,
+          ),
+        ],
+      ),
+    );
   }
 
   Future<Widget> listWolvesNews(BuildContext context) async {
     List<WolvesNews> wolvesNewsList = [];
     var res = apiServices.getWolvesNews('2022-1-1');
     await res.then(
-      (value) {
+          (value) {
         for (WolvesNews news in value) {
           wolvesNewsList.add(news);
         }
       },
     ).onError(
-      (error, stackTrace) {
+          (error, stackTrace) {
         print(error);
       },
     ).catchError((Object obj) {
@@ -360,54 +388,7 @@ class WolvesNewsPage extends StatelessWidget {
     });
     return Column(
       children: wolvesNewsList.map((wolvesNews) {
-        return GestureDetector(
-          onTap: () {
-            Common.wolvesNews = wolvesNews;
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const TinTucWolvesPage(),
-            ));
-          },
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    wolvesNews.Date.split('T')[0],
-                    style: const TextStyle(color: Colors.white),
-                  )
-                ],
-              ),
-              Text(
-                wolvesNews.Titile,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-                textAlign: TextAlign.left,
-              ),
-              FittedBox(
-                fit: BoxFit.fill,
-                child: Image.network(
-                  wolvesNews.Image,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Divider(
-                color: Colors.white,
-                height: 10,
-                thickness: 1,
-                indent: 5,
-                endIndent: 5,
-              ),
-            ],
-          ),
-        );
+        return itemNewsWolves(wolvesNews, context);
       }).toList(),
     );
   }
@@ -415,7 +396,7 @@ class WolvesNewsPage extends StatelessWidget {
 
 class SanGiaoDichPage extends StatelessWidget {
   ApiServices apiServices =
-      ApiServices(Dio(BaseOptions(contentType: 'application/json')));
+  ApiServices(Dio(BaseOptions(contentType: 'application/json')));
 
   SanGiaoDichPage({super.key});
 
@@ -451,13 +432,13 @@ class SanGiaoDichPage extends StatelessWidget {
     List<SanGiaoDich> sanGiaoDichList = [];
     var res = apiServices.getSanGiaoDich();
     await res.then(
-      (value) {
+          (value) {
         for (SanGiaoDich sanGD in value) {
           sanGiaoDichList.add(sanGD);
         }
       },
     ).onError(
-      (error, stackTrace) {
+          (error, stackTrace) {
         print(error);
       },
     ).catchError((Object obj) {

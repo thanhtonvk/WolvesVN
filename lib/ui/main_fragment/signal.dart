@@ -84,9 +84,6 @@ class WolvesSignalPage extends StatelessWidget {
     var today = DateTime.now();
     var dateFormat = DateFormat('yyyy-M-d');
     String currentDate = dateFormat.format(today);
-    if (Common.ACCOUNT.Email as String == 'thanhtonvk@gmail.com') {
-      currentDate = '2023-7-5';
-    }
     DatabaseReference ref = database.ref('TinHieuPost').child(currentDate);
     return StreamBuilder(
       stream: ref.onValue,
@@ -96,8 +93,8 @@ class WolvesSignalPage extends StatelessWidget {
           var dataSnapshot = snapshot.data!.snapshot.children;
           for (var value in dataSnapshot) {
             var val = value.value as Map<dynamic, dynamic>;
-            Signal signal = Signal(val["Content"], val["Date"], val["Id"], "",
-                val["SL"], val["TP"]);
+            Signal signal = Signal(val["Content"], val["Date"], val["Id"], val["Image"],
+              val["SL"], val["TP"],);
             signalList.add(signal);
           }
           signalList = signalList.reversed.toList();
@@ -128,6 +125,7 @@ class WolvesSignalPage extends StatelessWidget {
   }
 
   Widget itemSignal(Signal signal) {
+
     return Column(
       children: [
         Row(
@@ -190,9 +188,6 @@ class SignalVipPage extends StatelessWidget {
     var today = DateTime.now();
     var dateFormat = DateFormat('yyyy-MM-dd');
     String currentDate = dateFormat.format(today);
-    if (Common.ACCOUNT.Email as String == 'thanhtonvk@gmail.com') {
-      currentDate = '2023-11-17';
-    }
 
     DatabaseReference ref = database.ref('BanLenh').child(currentDate);
     return StreamBuilder(
@@ -273,15 +268,15 @@ class SignalVipPage extends StatelessWidget {
                 Expanded(child: Container()),
                 Expanded(
                     child: Container(
-                  margin: const EdgeInsets.only(left: 15),
-                  child: Text(
-                    "TP : ${signal.TP.toString()}",
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16),
-                  ),
-                )),
+                      margin: const EdgeInsets.only(left: 15),
+                      child: Text(
+                        "TP : ${signal.TP.toString()}",
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      ),
+                    )),
                 Expanded(child: Container()),
               ],
             ),
@@ -290,15 +285,15 @@ class SignalVipPage extends StatelessWidget {
                 Expanded(child: Container()),
                 Expanded(
                     child: Container(
-                  margin: const EdgeInsets.only(left: 15),
-                  child: Text(
-                    "SL : ${signal.SL.toString()}",
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16),
-                  ),
-                )),
+                      margin: const EdgeInsets.only(left: 15),
+                      child: Text(
+                        "SL : ${signal.SL.toString()}",
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      ),
+                    )),
                 Expanded(child: Container()),
               ],
             ),
@@ -450,7 +445,7 @@ class StatisticPage extends StatelessWidget {
   }
 
   ApiServices apiServices =
-      ApiServices(Dio(BaseOptions(contentType: 'application/json')));
+  ApiServices(Dio(BaseOptions(contentType: 'application/json')));
 
   Future<Widget> listPip() async {
     var today = DateTime.now();
@@ -472,74 +467,74 @@ class StatisticPage extends StatelessWidget {
 
     return Column(
         children: tongPips.map((tongPip) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Row(
+          return Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
-                tongPip.Date.split('T')[0],
-                style: const TextStyle(color: Colors.white),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Text(
-              tongPip.Money,
-              style: const TextStyle(
-                  color: Colors.orange,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
-            ),
-          ]),
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "TP : ${tongPip.TP}",
-                    style: const TextStyle(color: Colors.green, fontSize: 18),
-                  ),
-                  Text(
-                    "SL : ${tongPip.SL}",
-                    style: const TextStyle(color: Colors.red, fontSize: 18),
-                  )
-                ],
-              ),
-              Column(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    "PIP TP : ${tongPip.PipMoi}",
-                    style: const TextStyle(color: Colors.green, fontSize: 18),
-                  ),
-                  Text(
-                    "PIP SL : ${tongPip.PipCu}",
-                    style: const TextStyle(color: Colors.red, fontSize: 18),
+                    tongPip.Date.split('T')[0],
+                    style: const TextStyle(color: Colors.white),
                   )
                 ],
-              )
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Text(
+                  tongPip.Money,
+                  style: const TextStyle(
+                      color: Colors.orange,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+              ]),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "TP : ${tongPip.TP}",
+                        style: const TextStyle(color: Colors.green, fontSize: 18),
+                      ),
+                      Text(
+                        "SL : ${tongPip.SL}",
+                        style: const TextStyle(color: Colors.red, fontSize: 18),
+                      )
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        "PIP TP : ${tongPip.PipMoi}",
+                        style: const TextStyle(color: Colors.green, fontSize: 18),
+                      ),
+                      Text(
+                        "PIP SL : ${tongPip.PipCu}",
+                        style: const TextStyle(color: Colors.red, fontSize: 18),
+                      )
+                    ],
+                  )
+                ],
+              ),
+              const Divider(
+                color: Colors.white,
+                height: 10,
+                thickness: 1,
+                indent: 5,
+                endIndent: 5,
+              ),
             ],
-          ),
-          const Divider(
-            color: Colors.white,
-            height: 10,
-            thickness: 1,
-            indent: 5,
-            endIndent: 5,
-          ),
-        ],
-      );
-    }).toList());
+          );
+        }).toList());
   }
 }
