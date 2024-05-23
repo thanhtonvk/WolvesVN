@@ -9,7 +9,7 @@ part of 'tintuc.dart';
 TinTuc _$TinTucFromJson(Map<String, dynamic> json) => TinTuc(
       json['Content'] as String,
       json['Date'] as String,
-      json['ID'] as int,
+      (json['ID'] as num).toInt(),
       json['Time'] as String,
       json['Type'] as bool,
     );

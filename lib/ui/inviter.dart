@@ -97,7 +97,9 @@ class InviterState extends State<InviterPage> {
                             height: 60,
                             child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()));
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.orange),
@@ -116,7 +118,11 @@ class InviterState extends State<InviterPage> {
                             child: OutlinedButton(
                               style: OutlinedButton.styleFrom(
                                   side: const BorderSide(color: Colors.orange)),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) => Login()));
+                              },
                               child: const Text(
                                 "Bỏ qua",
                                 style: TextStyle(

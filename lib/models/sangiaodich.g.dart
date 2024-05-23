@@ -7,7 +7,7 @@ part of 'sangiaodich.dart';
 // **************************************************************************
 
 SanGiaoDich _$SanGiaoDichFromJson(Map<String, dynamic> json) => SanGiaoDich(
-      json['Id'] as int,
+      (json['Id'] as num).toInt(),
       json['Content'] as String,
       json['Titile'] as String,
     );

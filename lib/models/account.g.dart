@@ -11,12 +11,12 @@ Account _$AccountFromJson(Map<String, dynamic> json) => Account(
       DateOfBirth: json['DateOfBirth'] as String?,
       Email: json['Email'] as String?,
       FirstName: json['FirstName'] as String?,
-      Id: json['Id'] as int?,
+      Id: (json['Id'] as num?)?.toInt(),
       IsActive: json['IsActive'] as bool?,
       LastName: json['LastName'] as String?,
       PhoneNumber: json['PhoneNumber'] as String?,
-      Type: json['Type'] as int?,
-      Wolves: json['Wolves'] as int?,
+      Type: (json['Type'] as num?)?.toInt(),
+      Wolves: (json['Wolves'] as num?)?.toInt(),
       Password: json['Password'] as String?,
     );
 

@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dio/dio.dart';
-import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -13,6 +12,7 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:wolvesvn/models/fxsymbol.dart';
 import 'package:wolvesvn/models/quangcao.dart';
 import 'package:wolvesvn/ui/trading_page.dart';
+import '../../easy_search_bar.dart';
 import '../../generated/common.dart';
 import '../../services/api_service.dart';
 

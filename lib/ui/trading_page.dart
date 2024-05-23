@@ -115,7 +115,7 @@ class TradingPageState extends State<TradingPage> {
             Container(
               margin: EdgeInsets.all(5),
               child: const Text(
-                "Miễn trừ trách nhiệm: Báo cáo này chỉ được cung cấp để tham khảo, được cung cấp dựa trên một số giả định và điều kiện thị trường tại ngày báo cáo và có thể được thay đổi mà không cần thông báo. WolvesVN không chịu bất kỳ trách nhiệm nào liên quan đến việc sử dụng hoặc dựa trên thông tin và ý kiến được trình bày trong báo cáo này.",
+                "Miễn Trừ Trách Nhiệm : Phân Tích Này chỉ được cung cấp để tham khảo, và được cung cấp dựa trên điều kiện phân tích hiện tại của thị trường, Báo cáo này có thể thay đổi bất cứ lúc nào, WolvesVN không chịu bất kỳ trách nhiệm nào liên quan đến việc sử dụng hoặc dựa trên thông tin được thể hiện ở trên",
                 style: TextStyle(color: Colors.white54, fontSize: 12),
               ),
             )

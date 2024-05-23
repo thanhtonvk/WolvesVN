@@ -84,30 +84,56 @@ class CalendarEconomy extends StatelessWidget {
     return calendarWidget();
   }
 
-  String html = '''
-   <html>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-      </head>
-    
-     <body>
-   
-<div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
- <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
-  {
-  "width": "100%",
-  "height": "100%",
-  "colorTheme": "dark",
-  "isTransparent": true,
-  "locale": "vi_VN",
-  "importanceFilter": "-1,0,1"
-}
-  </script>
-</div>
-     </body>
+//   String html = '''
+//    <html>
+//       <head>
+//         <meta name="viewport" content="width=device-width, initial-scale=1">
+//       </head>
+//
+//      <body>
+//
+// <div class="tradingview-widget-container">
+//   <div class="tradingview-widget-container__widget"></div>
+//  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+//   {
+//   "width": "100%",
+//   "height": "100%",
+//   "colorTheme": "dark",
+//   "isTransparent": true,
+//   "locale": "vi_VN",
+//   "importanceFilter": "-1,0,1"
+// }
+//   </script>
+// </div>
+//      </body>
+//
+//  </html>''';
 
- </html>''';
+  String html = '''
+  <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+<!-- Finlogix Widget BEGIN-->
+<div class="finlogix-container"></div>
+<script type="text/javascript" src="https://widget.finlogix.com/Widget.js"></script>
+<script type="text/javascript">
+		Widget.init({
+				widgetId: "21cd9b7f-bad9-4b65-8b15-eaa1c7e88cdc",
+				type: "EconomicCalendar",
+				language: "vi",
+				isAdaptive: true
+		});
+</script>
+<!-- Finlogix Widget END-->
+  </body>
+</html>
+  ''';
 
   Widget calendarWidget() {
     WebViewController controller = WebViewController();
@@ -305,6 +331,7 @@ class WolvesNewsPage extends StatelessWidget {
       ApiServices(Dio(BaseOptions(contentType: 'application/json')));
 
   WolvesNewsPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {

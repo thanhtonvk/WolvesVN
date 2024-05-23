@@ -7,8 +7,8 @@ part of 'rating.dart';
 // **************************************************************************
 
 Rating _$RatingFromJson(Map<String, dynamic> json) => Rating(
-      json['Id'] as int?,
-      json['IdSan'] as int?,
+      (json['Id'] as num?)?.toInt(),
+      (json['IdSan'] as num?)?.toInt(),
       json['Name'] as String?,
       json['Content'] as String?,
       json['Date'] == null ? null : DateTime.parse(json['Date'] as String),

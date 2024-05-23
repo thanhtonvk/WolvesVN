@@ -8,7 +8,7 @@ part of 'tongpip.dart';
 
 TongPip _$TongPipFromJson(Map<String, dynamic> json) => TongPip(
       json['Date'] as String,
-      json['Id'] as int,
+      (json['Id'] as num).toInt(),
       json['Money'] as String,
       json['PipCu'] as num,
       json['PipMoi'] as num,

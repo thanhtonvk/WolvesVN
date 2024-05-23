@@ -40,6 +40,8 @@ abstract class ApiServices {
 
   @GET("sangiaodich/get")
   Future<List<SanGiaoDich>> getSanGiaoDich();
+  @GET("sangiaodich/getbyid")
+  Future<SanGiaoDich> getSanById(@Query("id") int id);
 
   @GET("vip/get-vip")
   Future<List<Vip>> getVip(@Query("idAccount") int id);
@@ -70,4 +72,7 @@ abstract class ApiServices {
 
   @GET('api/Ratings')
   Future<List<Rating>> getRatings(@Query("idSan") int idSan);
+
+  @GET('news-wolves/get-by-id')
+  Future<WolvesNews> getNewsById(@Query("Id") int id);
 }

@@ -2,9 +2,10 @@
 class Assets {
   Assets._();
 
-  static const String generatedAssets = 'lib/generated/assets.dart';
-  static const String generatedCommon = 'lib/generated/common.dart';
-  static const String libMain = 'lib/main.dart';
-  static const String uiLogin = 'lib/ui/login.dart';
+  static const String imagesBack = 'assets/images/back.png';
+  static const String imagesBackgroundSignal = 'assets/images/background_signal.png';
+  static const String imagesBackgroundSignalWolves = 'assets/images/background_signal_wolves.png';
+  static const String imagesLogo = 'assets/images/logo.png';
+  static const String imagesLogoVip = 'assets/images/logo-vip.png';
 
 }

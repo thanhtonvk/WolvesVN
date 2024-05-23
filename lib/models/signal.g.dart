@@ -9,7 +9,7 @@ part of 'signal.dart';
 Signal _$SignalFromJson(Map<String, dynamic> json) => Signal(
       json['Content'] as String?,
       json['Date'] as String?,
-      json['Id'] as int?,
+      (json['Id'] as num?)?.toInt(),
       json['Image'] as String?,
       (json['SL'] as num).toDouble(),
       (json['TP'] as num).toDouble(),

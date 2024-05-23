@@ -7,14 +7,14 @@ part of 'san.dart';
 // **************************************************************************
 
 San _$SanFromJson(Map<String, dynamic> json) => San(
-      json['Id'] as int?,
+      (json['Id'] as num?)?.toInt(),
       json['Name'] as String?,
       json['Image'] as String?,
       json['Detail'] as String?,
       (json['ExpertPoint'] as num?)?.toDouble(),
       (json['InvesterPoint'] as num?)?.toDouble(),
       json['Website'] as String?,
-      json['Year'] as int?,
+      (json['Year'] as num?)?.toInt(),
       json['Address'] as String?,
       json['TradePlatform'] as String?,
       json['Pushmax'] as String?,

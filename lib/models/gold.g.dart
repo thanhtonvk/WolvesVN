@@ -10,7 +10,7 @@ Gold _$GoldFromJson(Map<String, dynamic> json) => Gold(
       (json['BuyInto'] as num?)?.toDouble(),
       json['Content'] as String?,
       json['Date'] as String?,
-      json['Id'] as int?,
+      (json['Id'] as num?)?.toInt(),
       (json['SoldOut'] as num?)?.toDouble(),
       json['Symbol'] as String?,
     );

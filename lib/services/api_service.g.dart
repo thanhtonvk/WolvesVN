@@ -197,6 +197,29 @@ class _ApiServices implements ApiServices {
   }
 
   @override
+  Future<SanGiaoDich> getSanById(id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'id': id};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SanGiaoDich>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'sangiaodich/getbyid',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SanGiaoDich.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<List<Vip>> getVip(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'idAccount': id};
@@ -418,6 +441,29 @@ class _ApiServices implements ApiServices {
     var value = _result.data!
         .map((dynamic i) => Rating.fromJson(i as Map<String, dynamic>))
         .toList();
+    return value;
+  }
+
+  @override
+  Future<WolvesNews> getNewsById(id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'Id': id};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<WolvesNews>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'news-wolves/get-by-id',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = WolvesNews.fromJson(_result.data!);
     return value;
   }
 

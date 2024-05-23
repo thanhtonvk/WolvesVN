@@ -1,16 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:wolvesvn/services/notification_service.dart';
 import 'package:wolvesvn/ui/main_fragment/exchanges.dart';
 import 'package:wolvesvn/ui/main_fragment/general.dart';
 import 'package:wolvesvn/ui/main_fragment/market.dart';
 import 'package:wolvesvn/ui/main_fragment/news.dart';
 import 'package:wolvesvn/ui/main_fragment/signal.dart';
-
 import '../generated/common.dart';
 import '../models/vip.dart';
 import '../services/api_service.dart';

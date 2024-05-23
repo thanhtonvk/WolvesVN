@@ -7,11 +7,11 @@ part of 'quangcao.dart';
 // **************************************************************************
 
 QuangCao _$QuangCaoFromJson(Map<String, dynamic> json) => QuangCao(
-      json['Id'] as int?,
+      (json['Id'] as num?)?.toInt(),
       json['Name'] as String?,
       json['Image'] as String?,
       json['End'] as String?,
-      json['Time'] as int?,
+      (json['Time'] as num?)?.toInt(),
       json['Link'] as String?,
     );
 

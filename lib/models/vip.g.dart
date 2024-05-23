@@ -7,11 +7,11 @@ part of 'vip.dart';
 // **************************************************************************
 
 Vip _$VipFromJson(Map<String, dynamic> json) => Vip(
-      json['Id'] as int,
-      json['IdAccount'] as int,
+      (json['Id'] as num).toInt(),
+      (json['IdAccount'] as num).toInt(),
       json['Start'] as String,
       json['End'] as String,
-      json['Type'] as int,
+      (json['Type'] as num).toInt(),
     );
 
 Map<String, dynamic> _$VipToJson(Vip instance) => <String, dynamic>{

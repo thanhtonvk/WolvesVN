@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:wolvesvn/models/signal.dart';
@@ -93,8 +92,14 @@ class WolvesSignalPage extends StatelessWidget {
           var dataSnapshot = snapshot.data!.snapshot.children;
           for (var value in dataSnapshot) {
             var val = value.value as Map<dynamic, dynamic>;
-            Signal signal = Signal(val["Content"], val["Date"], val["Id"], val["Image"],
-                val["SL"], val["TP"],);
+            Signal signal = Signal(
+              val["Content"],
+              val["Date"],
+              val["Id"],
+              val["Image"],
+              val["SL"],
+              val["TP"],
+            );
             signalList.add(signal);
           }
           signalList = signalList.reversed.toList();
@@ -125,7 +130,6 @@ class WolvesSignalPage extends StatelessWidget {
   }
 
   Widget itemSignal(Signal signal) {
-
     return Column(
       children: [
         Row(
@@ -151,7 +155,14 @@ class WolvesSignalPage extends StatelessWidget {
         const SizedBox(
           height: 5,
         ),
-        Image.network(signal.Image.toString(), fit: BoxFit.fitWidth),
+        Image.network(
+          signal.Image.toString(),
+          fit: BoxFit.fitWidth,
+          errorBuilder:
+              (BuildContext context, Object exception, StackTrace? stackTrace) {
+            return Text('');
+          },
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -305,12 +316,18 @@ class SignalVipPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black87,
-      child: SingleChildScrollView(
-        child: wolvesSignal(),
-      ),
-    );
+    if (Common.isVip) {
+      return Container(
+        color: Colors.black87,
+        child: SingleChildScrollView(
+          child: wolvesSignal(),
+        ),
+      );
+    } else {
+      return Container(
+        color: Colors.black87,
+      );
+    }
   }
 }
 

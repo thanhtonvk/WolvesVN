@@ -7,7 +7,7 @@ part of 'doitac.dart';
 // **************************************************************************
 
 DoiTac _$DoiTacFromJson(Map<String, dynamic> json) => DoiTac(
-      json['Id'] as int,
+      (json['Id'] as num).toInt(),
       json['TenDoiTac'] as String,
       json['TrangWeb'] as String,
       json['ThongTinKhac'] as String,

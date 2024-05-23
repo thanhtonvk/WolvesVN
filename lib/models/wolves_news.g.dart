@@ -9,7 +9,7 @@ part of 'wolves_news.dart';
 WolvesNews _$WolvesNewsFromJson(Map<String, dynamic> json) => WolvesNews(
       json['Content'] as String,
       json['Date'] as String,
-      json['Id'] as int,
+      (json['Id'] as num).toInt(),
       json['Image'] as String,
       json['Titile'] as String,
     );
